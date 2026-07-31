@@ -57,14 +57,16 @@ run reveals the true format instead of failing quietly.
   display, and it leaves alone any game carrying Display Helper's own tag, so
   Display Helper stays the fallback for titles needing exclusive fullscreen.
 - **YaboDev** — dev-side tagging that feeds the gate.
-- **YaboGlass** — ShaderGlass-era overlay control. **Superseded**; shaders moved to
-  native GLSL. Kept so it is not lost, not because it is current.
 
 ## Themes
+
+Themes are XAML and carry a `theme.yaml` rather than an `extension.yaml`.
 
 - **YaboTheme** — "Mythos Cider" 2.0, the fork actually in use.
 - **MythosFast** — "Mythos (Fast)" 2.0, the upstream it forks from, vendored for
   diffing.
+- **YaboGlass** — the earlier ShaderGlass-era skin. **Superseded** (shaders moved
+  to native GLSL); kept so it is not lost, not because it is current.
 
 ## Building
 
