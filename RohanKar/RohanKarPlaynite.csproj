@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    RohanKar for Playnite — a LibraryPlugin that imports RohanKar's installed games.
+
+    Scans the install folder rather than reading library.db: on a real install that
+    database is empty while the games are all on disk, so the folder is the only
+    source of truth. Which .exe is the game is decided by ExePicker, tuned against
+    a real 19-game library.
+
+    Build: dotnet build -c Release  ->  bin\Release\net462\RohanKarPlaynite.dll
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net462</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>RohanKarPlaynite</AssemblyName>
+    <RootNamespace>RohanKarPlaynite</RootNamespace>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Reference-only: Playnite supplies both at runtime, so neither is copied out. -->
+    <PackageReference Include="PlayniteSDK" Version="6.16.0">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="extension.yaml" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

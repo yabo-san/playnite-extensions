@@ -1,0 +1,11 @@
+# Playnite extension manifest for the Yabo Launcher library importer.
+# NOTE: this manifest `Id` is a STRING and is distinct from the class `Id` (a Guid)
+# in YaboLibraryPlugin.cs. Both are fixed identifiers — do NOT change them once shipped
+# (the class Guid becomes every imported game's PluginId; changing it orphans the library).
+Id: YaboLibrary_d3c1f0a2
+Name: Yabo Launcher
+Author: Yabo Launcher
+Version: 0.1.0
+Module: YaboLibrary.dll
+Type: GameLibrary
+Icon: icon.png

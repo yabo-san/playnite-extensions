@@ -1,0 +1,23 @@
+Id: Hydra_21ed79dd-9d95-478f-9d3c-69ede738099b
+Name: Hydra
+Author: kevin
+Version: 1.0
+Module: HydraPlaynite.dll
+Type: GameLibrary
+Description: >
+  Imports the Hydra launcher's library into Playnite.
+
+  Hydra keeps its library in a LevelDB whose values are Snappy-compressed, so the
+  read is delegated to a small Node helper using classic-level — the same library
+  Hydra itself opens the database with. The helper is looked for beside the
+  extension first, then at ~/.config/scripts/hydra/dump-library.js.
+
+  Hydra must be CLOSED while refreshing: LevelDB takes an exclusive lock. The
+  plugin checks for a running Hydra and says so rather than failing obscurely.
+
+  Most Hydra entries are CATALOGUE entries with no executable — games you have
+  looked at, not installed. Those import without a Play action, and the plugin
+  says as much rather than leaving you with a library of dead buttons. An entry
+  becomes playable once Hydra records an executablePath that exists on disk.
+
+  Requires Node on PATH, and `npm install classic-level` in the helper's folder.

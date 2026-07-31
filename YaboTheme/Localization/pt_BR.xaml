@@ -1,0 +1,42 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:String x:Key="LOCVersionLabel">Botão Jogar</sys:String>
+    <sys:String x:Key="LOCNotesLabel">Sinopse</sys:String>
+    <sys:String x:Key="LOCExitAppLabel">Sair do Mythos</sys:String>
+    <sys:String x:Key="LOCOpenPlaynite">Abrir Mythos</sys:String>
+
+    <sys:String x:Key="LOCPlayGame">Iniciar</sys:String>
+
+    <sys:String x:Key="LOCMythos_Search">Pesquisar</sys:String>
+    <sys:String x:Key="LOCMythos_SteamNews">Notícias</sys:String>
+    <sys:String x:Key="LOCMythos_SteamGuides">Guias</sys:String>
+    <sys:String x:Key="LOCMythos_SteamDiscussions">Discussões</sys:String>
+    <sys:String x:Key="LOCMythos_SteamCommunity">Comunidade</sys:String>
+    <sys:String x:Key="LOCMythos_SteamStore">Página da loja</sys:String>
+    <sys:String x:Key="LOCMythos_SteamWorkshop">Oficina</sys:String>
+    <sys:String x:Key="LOCMythos_SteamAchievements">Conquistas</sys:String>
+    <sys:String x:Key="LOCMythos_Close">Fechar</sys:String>
+    <sys:String x:Key="LOCMythos_Cancel">Cancelar</sys:String>
+    <sys:String x:Key="LOCMythos_NothingSelected">Nada selecionado</sys:String>
+    <sys:String x:Key="LOCMythos_CompStatus">Status</sys:String>
+    <sys:String x:Key="LOCMythos_UserRating">Minha avaliação</sys:String>
+    <sys:String x:Key="LOCMythos_CriticRating">Avaliações da crítica</sys:String>
+    <sys:String x:Key="LOCMythos_CommRating">Avaliações dos jogadores</sys:String>
+    <sys:String x:Key="LOCMythos_PlayTime">Tempo jogado</sys:String>
+    <sys:String x:Key="LOCMythos_RecentActivity">Última sessão</sys:String>
+    <sys:String x:Key="LOCMythos_ReadMore">Ler mais</sys:String>
+    <sys:String x:Key="LOCMythos_ReadLess">Ler menos</sys:String>
+    <sys:String x:Key="LOCMythos_SocialLinks">Links sociais</sys:String>
+    <sys:String x:Key="LOCMythos_Tags">Tags:</sys:String>
+    <sys:String x:Key="LOCMythos_AchievementsTitle">Conquistas</sys:String>
+    <sys:String x:Key="LOCMythos_ShowAll">Ver tudo</sys:String>
+    <sys:String x:Key="LOCMythos_Unlocked">Desbloqueado:</sys:String>
+    <sys:String x:Key="LOCMythos_Of">de</sys:String>
+    <sys:String x:Key="LOCMythos_Edit">Configurações</sys:String>
+    <sys:String x:Key="LOCMythos_More">Gerenciar</sys:String>
+    <sys:String x:Key="LOCMythos_HLTB_Main">História principal</sys:String>
+    <sys:String x:Key="LOCMythos_HLTB_MainPlus">História principal +</sys:String>
+    <sys:String x:Key="LOCMythos_HLTB_Completionist">Completista</sys:String>
+</ResourceDictionary>

@@ -1,0 +1,42 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:String x:Key="LOCVersionLabel">游戏按钮</sys:String>
+    <sys:String x:Key="LOCNotesLabel">简介</sys:String>
+    <sys:String x:Key="LOCExitAppLabel">退出 Mythos</sys:String>
+    <sys:String x:Key="LOCOpenPlaynite">打开 Mythos</sys:String>
+
+    <sys:String x:Key="LOCPlayGame">启动</sys:String>
+
+    <sys:String x:Key="LOCMythos_Search">搜索</sys:String>
+    <sys:String x:Key="LOCMythos_SteamNews">新闻</sys:String>
+    <sys:String x:Key="LOCMythos_SteamGuides">攻略</sys:String>
+    <sys:String x:Key="LOCMythos_SteamDiscussions">讨论</sys:String>
+    <sys:String x:Key="LOCMythos_SteamCommunity">社区</sys:String>
+    <sys:String x:Key="LOCMythos_SteamStore">商店页面</sys:String>
+    <sys:String x:Key="LOCMythos_SteamWorkshop">创意工坊</sys:String>
+    <sys:String x:Key="LOCMythos_SteamAchievements">成就</sys:String>
+    <sys:String x:Key="LOCMythos_Close">关闭</sys:String>
+    <sys:String x:Key="LOCMythos_Cancel">取消</sys:String>
+    <sys:String x:Key="LOCMythos_NothingSelected">未选择任何内容</sys:String>
+    <sys:String x:Key="LOCMythos_CompStatus">状态</sys:String>
+    <sys:String x:Key="LOCMythos_UserRating">我的评分</sys:String>
+    <sys:String x:Key="LOCMythos_CriticRating">评论家评分</sys:String>
+    <sys:String x:Key="LOCMythos_CommRating">玩家评分</sys:String>
+    <sys:String x:Key="LOCMythos_PlayTime">游戏时间</sys:String>
+    <sys:String x:Key="LOCMythos_RecentActivity">最近游玩</sys:String>
+    <sys:String x:Key="LOCMythos_ReadMore">阅读更多</sys:String>
+    <sys:String x:Key="LOCMythos_ReadLess">收起</sys:String>
+    <sys:String x:Key="LOCMythos_SocialLinks">社交链接</sys:String>
+    <sys:String x:Key="LOCMythos_Tags">标签:</sys:String>
+    <sys:String x:Key="LOCMythos_AchievementsTitle">成就</sys:String>
+    <sys:String x:Key="LOCMythos_ShowAll">查看全部</sys:String>
+    <sys:String x:Key="LOCMythos_Unlocked">已解锁:</sys:String>
+    <sys:String x:Key="LOCMythos_Of">共</sys:String>
+    <sys:String x:Key="LOCMythos_Edit">设置</sys:String>
+    <sys:String x:Key="LOCMythos_More">管理</sys:String>
+    <sys:String x:Key="LOCMythos_HLTB_Main">主线剧情</sys:String>
+    <sys:String x:Key="LOCMythos_HLTB_MainPlus">主线剧情+</sys:String>
+    <sys:String x:Key="LOCMythos_HLTB_Completionist">全成就</sys:String>
+</ResourceDictionary>

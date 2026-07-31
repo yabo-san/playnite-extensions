@@ -1,0 +1,42 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:String x:Key="LOCVersionLabel">플레이 버튼</sys:String>
+    <sys:String x:Key="LOCNotesLabel">시놉시스</sys:String>
+    <sys:String x:Key="LOCExitAppLabel">Mythos 종료</sys:String>
+    <sys:String x:Key="LOCOpenPlaynite">Mythos 열기</sys:String>
+
+    <sys:String x:Key="LOCPlayGame">실행</sys:String>
+
+    <sys:String x:Key="LOCMythos_Search">검색</sys:String>
+    <sys:String x:Key="LOCMythos_SteamNews">뉴스</sys:String>
+    <sys:String x:Key="LOCMythos_SteamGuides">가이드</sys:String>
+    <sys:String x:Key="LOCMythos_SteamDiscussions">토론</sys:String>
+    <sys:String x:Key="LOCMythos_SteamCommunity">커뮤니티</sys:String>
+    <sys:String x:Key="LOCMythos_SteamStore">스토어 페이지</sys:String>
+    <sys:String x:Key="LOCMythos_SteamWorkshop">창작 마당</sys:String>
+    <sys:String x:Key="LOCMythos_SteamAchievements">도전 과제</sys:String>
+    <sys:String x:Key="LOCMythos_Close">닫기</sys:String>
+    <sys:String x:Key="LOCMythos_Cancel">취소</sys:String>
+    <sys:String x:Key="LOCMythos_NothingSelected">선택 없음</sys:String>
+    <sys:String x:Key="LOCMythos_CompStatus">상태</sys:String>
+    <sys:String x:Key="LOCMythos_UserRating">내 평점</sys:String>
+    <sys:String x:Key="LOCMythos_CriticRating">평론가 평점</sys:String>
+    <sys:String x:Key="LOCMythos_CommRating">플레이어 평점</sys:String>
+    <sys:String x:Key="LOCMythos_PlayTime">플레이 시간</sys:String>
+    <sys:String x:Key="LOCMythos_RecentActivity">마지막 플레이</sys:String>
+    <sys:String x:Key="LOCMythos_ReadMore">더 읽기</sys:String>
+    <sys:String x:Key="LOCMythos_ReadLess">접기</sys:String>
+    <sys:String x:Key="LOCMythos_SocialLinks">소셜 링크</sys:String>
+    <sys:String x:Key="LOCMythos_Tags">태그:</sys:String>
+    <sys:String x:Key="LOCMythos_AchievementsTitle">도전 과제</sys:String>
+    <sys:String x:Key="LOCMythos_ShowAll">전체 보기</sys:String>
+    <sys:String x:Key="LOCMythos_Unlocked">달성:</sys:String>
+    <sys:String x:Key="LOCMythos_Of">/</sys:String>
+    <sys:String x:Key="LOCMythos_Edit">설정</sys:String>
+    <sys:String x:Key="LOCMythos_More">관리</sys:String>
+    <sys:String x:Key="LOCMythos_HLTB_Main">메인 스토리</sys:String>
+    <sys:String x:Key="LOCMythos_HLTB_MainPlus">메인 스토리+</sys:String>
+    <sys:String x:Key="LOCMythos_HLTB_Completionist">컴플리셔니스트</sys:String>
+</ResourceDictionary>

@@ -1,0 +1,43 @@
+Constants:
+    - "Accent Colors"
+    - AccentIdleBrush: 'Primary Accent'
+    - AccentIdleBrushDarker: 'Accent Dark (~20%)'
+    - AccentHighlightBrush: 'Accent Light (~20%)'
+    - AccentColorOverride: 'Apply Accent Override'
+    - "Top Panel"
+    - SearchBoxWidth(125,200): 'Search Box Width'
+    - TopPanelSquareStyle: 'Rounded Square Mode'
+    - TopPanelSeparator: 'Show Plugin Separator'
+    - UseNavigationButtons: 'Navigation Buttons (Requires ThemeExtras)'
+    - UseMythosLogo: 'Use Mythos Icon as Menu Button'
+    - HideNotificationBadge: 'Hide Notification Badge'
+    - "General"
+    - UseFloatingSidebar: 'Floating Sidebar'
+    - UseFloatingFilterPanel: 'Floating Filter Panel'
+    - PlayButtonIcon: 'Show Icon on Launch Button'
+    - HideGestureKeys: 'Hide Keyboard Shortcuts in Menus'
+    - "Details View"
+    - DetailsViewDisableLogos: 'Show Cover Instead of Logo'
+    - DetailsViewShowFavorites: 'Show Favorites Icon'
+    - DetailsViewTruncateDescription: 'Truncate Descriptions'
+    - DetailsViewTitle: 'Show Game Title'
+    - DetailsViewDescSubHeader: 'Show Description Header'
+    - DetailsViewSocialSubHeader: 'Show Social Links Header'
+    - DetailsViewSteamLinksBar: 'Show Steam Links Bar'
+    - DetailsViewGenreFeature: 'Show Genres and Features'
+    - "Grid View"
+    - GridViewCoverZoomOnHover: 'Zoom on Hover'
+    - GridViewShowFavorites: 'Show Favorites Badge'
+    - GridViewPlayButtons: 'Show Play Button on Hover'
+    - GridViewDetailsPanel: 'Enable Details Panel'
+    - GridViewCloseButton: 'Show Details Panel Close Button'
+    - GridViewCoverCloudIcon: 'Cloud Icon for Uninstalled Games'
+    - GridViewCoverPlatformIcon: 'Show Library Source Icons (Beta)'
+    - GridViewCoverDisplayLibraryBanner: 'Library Banners (Requires ThemeExtras)'
+    - GridViewCoverLibraryBannerAlign: 'Banner Alignment (Requires ThemeExtras)'
+    - "Terminology"
+    - LOCPlayGame: 'Launch Button Label'
+    - LOCMythos_More: 'Manage Button Label'
+    - LOCMythos_Edit: 'Settings Button Label'
+    - LOCMythos_SocialLinks: 'Social Links Section Label'
+    - LOCMythos_AchievementsTitle: 'Achievements Section Label'

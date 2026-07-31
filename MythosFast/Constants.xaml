@@ -1,0 +1,443 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <FontFamily x:Key="TightFont">Inter Tight</FontFamily>
+
+    <Visibility x:Key="GridViewCoverCompStatusSubtitleVisibility">Collapsed</Visibility>
+    <sys:Boolean x:Key="GridViewAllowUseOfLogos">True</sys:Boolean>
+    <sys:Boolean x:Key="GridViewCoverUseRoundedCorners">True</sys:Boolean>
+    <HorizontalAlignment x:Key="CloseButtonAlignSide">Right</HorizontalAlignment>
+
+    <!-- Implemented Modifiers -->
+    <sys:Double x:Key="SearchBoxWidth">185</sys:Double>
+    <sys:Boolean x:Key="HideGestureKeys">False</sys:Boolean>
+    <sys:Boolean x:Key="TopPanelSquareStyle">False</sys:Boolean>
+    <sys:Boolean x:Key="TopPanelSeparator">False</sys:Boolean>
+    <sys:Boolean x:Key="PlayButtonIcon">False</sys:Boolean>
+    <sys:Boolean x:Key="UseFloatingSidebar">True</sys:Boolean>
+    <sys:Boolean x:Key="UseFloatingFilterPanel">True</sys:Boolean>
+    <sys:Boolean x:Key="UseNavigationButtons">False</sys:Boolean>
+    <sys:Boolean x:Key="UseButtonBorders">True</sys:Boolean>
+    <sys:Boolean x:Key="UseMythosLogo">False</sys:Boolean>
+    <sys:Boolean x:Key="HideNotificationBadge">False</sys:Boolean>
+    <sys:Boolean x:Key="AccentColorOverride">False</sys:Boolean>
+    <sys:Boolean x:Key="DetailsViewDisableLogos">False</sys:Boolean>
+    <sys:Boolean x:Key="DetailsViewShowFavorites">True</sys:Boolean>
+    <sys:Boolean x:Key="DetailsViewDescSubHeader">True</sys:Boolean>
+    <sys:Boolean x:Key="DetailsViewSocialSubHeader">True</sys:Boolean>
+    <sys:Boolean x:Key="DetailsViewSteamLinksBar">True</sys:Boolean>
+    <sys:Boolean x:Key="DetailsViewTitle">False</sys:Boolean>
+    <sys:Boolean x:Key="DetailsViewGenreFeature">True</sys:Boolean>
+    <sys:Boolean x:Key="DetailsViewTruncateDescription">False</sys:Boolean>
+    <sys:Boolean x:Key="GridViewShowFavorites">True</sys:Boolean>
+    <sys:Boolean x:Key="GridViewPlayButtons">True</sys:Boolean>
+    <sys:Boolean x:Key="GridViewDetailsPanel">True</sys:Boolean>
+    <sys:Boolean x:Key="GridViewCoverPlatformIcon">False</sys:Boolean>
+    <sys:Boolean x:Key="GridViewCoverCloudIcon">True</sys:Boolean>
+    <sys:Boolean x:Key="GridViewCloseButton">True</sys:Boolean>
+    <sys:Boolean x:Key="GridViewCoverZoomOnHover">True</sys:Boolean>
+    <sys:Boolean x:Key="GridViewCoverDisplayLibraryBanner">False</sys:Boolean>
+    <VerticalAlignment x:Key="GridViewCoverLibraryBannerAlign">Top</VerticalAlignment>
+    <!-- Implemented Modifiers -->
+
+    <sys:Double x:Key="FontSizeSmaller">10</sys:Double>
+    <sys:Double x:Key="FontSizeSmall">12</sys:Double>
+    <sys:Double x:Key="FontSize">14</sys:Double>
+    <sys:Double x:Key="FontSizeLarge">16</sys:Double>
+    <sys:Double x:Key="FontSizeLarge18">18</sys:Double>
+    <sys:Double x:Key="FontSizeLarge20">20</sys:Double>
+    <sys:Double x:Key="FontSizeLarge22">22</sys:Double>
+    <sys:Double x:Key="FontSizeLarge24">24</sys:Double>
+    <sys:Double x:Key="FontSizeLarge28">28</sys:Double>
+    <sys:Double x:Key="FontSizeLarge32">32</sys:Double>
+    <sys:Double x:Key="FontSizeLarge40">40</sys:Double>
+    <sys:Double x:Key="FontSizeLarge48">48</sys:Double>
+    <FontFamily x:Key="FontFamily">Inter</FontFamily>
+    <FontFamily x:Key="MonospaceFontFamily">Inter Mod</FontFamily>
+
+    <sys:Double x:Key="EllipseBorderThickness">1</sys:Double>
+    <CornerRadius x:Key="ControlCornerRadius">6</CornerRadius>
+    <CornerRadius x:Key="ControlCornerRadiusSmall">4</CornerRadius>
+    <CornerRadius x:Key="ControlCornerRadiusMedium">8</CornerRadius>
+    <CornerRadius x:Key="ControlCornerRadiusLarge">16</CornerRadius>
+    <CornerRadius x:Key="ControlCornerRadiusLarger">22</CornerRadius>
+    <CornerRadius x:Key="ControlCornerRadiusLargeX">24</CornerRadius>
+    <CornerRadius x:Key="SteamLinksBorderCornerRadius">21</CornerRadius>
+    <CornerRadius x:Key="MenuCornerRadius">14</CornerRadius>
+    <CornerRadius x:Key="VideoCornerRadius">18</CornerRadius>
+    <CornerRadius x:Key="VideoControlsCornerRadius">18,18,0,0</CornerRadius>
+
+    <CornerRadius x:Key="TopPanelControlCornerRadius">17</CornerRadius>
+    <CornerRadius x:Key="TopPanelControlCornerRadiusPill">23</CornerRadius>
+
+    <CornerRadius x:Key="TopPanelControlCornerRadiusSquare">8</CornerRadius>
+    <CornerRadius x:Key="TopPanelControlCornerRadiusPillSquare">13</CornerRadius>
+
+    <CornerRadius x:Key="GridCornerRadius">14</CornerRadius>
+    <CornerRadius x:Key="GridCornerRadiusBorder">17</CornerRadius>
+    <CornerRadius x:Key="GridCornerDetailsPanel">22</CornerRadius>
+    
+    <Thickness x:Key="PopupBorderThickness">1</Thickness>
+    <Thickness x:Key="ControlBorderThickness">1</Thickness>
+    <Thickness x:Key="SidebarItemPadding">8</Thickness>
+    <Thickness x:Key="ButtonBorder">2</Thickness>
+
+    <Color x:Key="BlackColor">#707275</Color>
+    <Color x:Key="WhiteColor">#18181B</Color>
+    <Color x:Key="GreenColor">#34c759</Color>
+    <Color x:Key="TextColor">#E4E4E6</Color>
+    <Color x:Key="TextColorDarker">#888991</Color>
+    <Color x:Key="TextColorDark">#FF000000</Color>
+    <Color x:Key="MainColor">#2C3A67</Color>
+    <Color x:Key="MainColorDark">#0D1225</Color>
+    <Color x:Key="HoverColor">#247BA0</Color>
+    <Color x:Key="GlyphColor">#18181B</Color>
+    <Color x:Key="AccentSelectedColor">#FF04A5FF</Color>
+    <Color x:Key="DestructiveColor">#db3a43</Color>
+    <Color x:Key="DestructiveIdleColor">#4D8F1F14</Color>
+    <Color x:Key="DestructiveIdleTextColor">#f06a67</Color>
+
+    <SolidColorBrush x:Key="DestructiveIdleBrush" Color="{DynamicResource DestructiveIdleColor}" />
+    <SolidColorBrush x:Key="DestructiveIdleTextBrush" Color="{DynamicResource DestructiveIdleTextColor}" />
+    <SolidColorBrush x:Key="DestructiveBrush" Color="{DynamicResource DestructiveColor}" />
+
+    <!-- Blue Colors -->
+    <Color x:Key="HighlightGlyphColor">#FF0379FF</Color>
+
+    <SolidColorBrush x:Key="TagBackgroundBrush" Color="#4d0062d1" />
+    <SolidColorBrush x:Key="TagTextBrush" Color="#5CA8FF" />
+    <SolidColorBrush x:Key="TagBackgroundHoverBrush" Color="#3594ff" />
+
+    <SolidColorBrush x:Key="AccentHighlightBrush" Color="#5CA8FF" />
+    <SolidColorBrush x:Key="AccentIdleBrush" Color="#FF0379FF" />
+    <SolidColorBrush x:Key="AccentIdleBrushDarker" Color="#FF036dE6" />
+    <SolidColorBrush x:Key="AccentHoverBrush" Color="{DynamicResource AccentSelectedColor}" />
+    <!-- Blue Colors -->
+
+    <SolidColorBrush x:Key="GreenBrush" Color="{DynamicResource GreenColor}" />
+
+    <Color x:Key="PopupBackgroundColor">#000000</Color>
+    <Color x:Key="PopupBackgroundToneColor">#19191C</Color>
+    <Color x:Key="PopupBorderColor">#28282b</Color>
+
+    <SolidColorBrush x:Key="SubtlePopUpBackgroundBrush" Color="#0c0c0e" />
+    <SolidColorBrush x:Key="SubtlePopUpControlBrush" Color="#1d1d1f" />
+    <SolidColorBrush x:Key="SubtleControlBackgroundBrush" Color="#121214" />
+
+    <SolidColorBrush x:Key="PopupBackgroundToneBrush" Color="{DynamicResource PopupBackgroundToneColor}" />
+    <SolidColorBrush x:Key="PopupIdleBackgroundBrush" Color="#18181B" />
+    <SolidColorBrush x:Key="PopupHoverBackgroundBrush" Color="#323236" />
+    <SolidColorBrush x:Key="PopupSeparatorBrush" Color="{DynamicResource PanelSeparatorColor}" />
+    <SolidColorBrush x:Key="PopupBackgroundBrush" Color="{DynamicResource PopupBackgroundColor}" />
+    <SolidColorBrush x:Key="PopupBorderBrush" Color="{DynamicResource PopupBorderColor}" />
+    
+    <Color x:Key="BackgroundToneColor">#FFCC00</Color>
+    <Color x:Key="GridItemBackgroundColor">Transparent</Color>
+
+    <Color x:Key="PanelSeparatorColor">#242427</Color>
+
+    <Color x:Key="WindowPanelSeparatorColor">#1418181B</Color>
+    <Color x:Key="DataChangeNotifColor">#FFA500</Color>
+
+    <Color x:Key="8%White">#1418181B</Color>
+    <Color x:Key="16%White">#2918181B</Color>
+    <Color x:Key="24%White">#3D18181B</Color>
+    <Color x:Key="36%White">#5C18181B</Color>
+    <Color x:Key="40%White">#6618181B</Color>
+    <Color x:Key="Brown">#795548</Color>
+    <Color x:Key="BrownDark">#280B0A</Color>
+
+    <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#E6000000" />
+    <SolidColorBrush x:Key="GlobalBackgroundBrush" Color="Transparent" />
+
+    <SolidColorBrush x:Key="GlassControlBrushDark" Color="#40000000" />
+    <SolidColorBrush x:Key="GlassControlBrushLight" Color="#0DFFFFFF" />
+    <SolidColorBrush x:Key="GlassBackgroundBrushDark" Color="#33000000" />
+
+    <SolidColorBrush x:Key="ControlIdleBackgroundBrush" Color="#18181B" />
+    <SolidColorBrush x:Key="ControlIdleBackgroundBrushDark75" Color="#101214" />
+    <SolidColorBrush x:Key="ControlIdleBackgroundBrushDark50" Color="#0B0C0E" />
+    <SolidColorBrush x:Key="ControlIdleBorderBrush" Color="#323236" />
+    <SolidColorBrush x:Key="ControlIdleBorderBrushOverlay" Color="#2EFFFFFF" />
+    <SolidColorBrush x:Key="ControlIdleBackgroundBrushOverlay" Color="#E618181B" />
+    <SolidColorBrush x:Key="ContentBorderBrushOverlay" Color="#1AFFFFFF" />
+    <SolidColorBrush x:Key="ContentBrushOverlay" Color="#1AFFFFFF" />
+    <SolidColorBrush x:Key="ContentBrushOverlayTwo" Color="#26FFFFFF" />
+    <SolidColorBrush x:Key="ContentBrushOverlayHover" Color="#33FFFFFF" />
+    <SolidColorBrush x:Key="ControlContrastBorderBrush" Color="#1FFFFFFF" />
+    <SolidColorBrush x:Key="ControlContrastBorderBrushBright" Color="#4DFFFFFF" />
+    <SolidColorBrush x:Key="ControlContrastBorderBrushBrightest" Color="#59FFFFFF" />
+    <SolidColorBrush x:Key="ControlHoverBackgroundBrush" Color="#242427" />
+    <SolidColorBrush x:Key="ControlHoverBorderBrush" Color="#323236" />
+    <SolidColorBrush x:Key="ControlSelectedBackgroundBrush" Color="#323236" />
+
+    <SolidColorBrush x:Key="ControlFilledHoverBackgroundBrush" Color="{DynamicResource 24%White}" />
+
+    <SolidColorBrush x:Key="GlyphBrush" Color="{DynamicResource GlyphColor}" />
+
+    <SolidColorBrush x:Key="EmptyStarBrush" Color="#8071767B" />
+
+    <SolidColorBrush x:Key="WhiteBrush" Color="#18181B" />
+    <SolidColorBrush x:Key="ActuallyWhiteBrushBrush" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="White60Brush" Color="#9918181B" />
+    <SolidColorBrush x:Key="White40Brush" Color="#6618181B" />
+    <SolidColorBrush x:Key="SteamTealBrush" Color="#1383B4" />
+
+    <SolidColorBrush x:Key="ButtonIdleBackgroundBrush" Color="#E7E9EA" />
+    <SolidColorBrush x:Key="ButtonHoverBackgroundBrush" Color="#707275" />
+    <SolidColorBrush x:Key="ButtonBrush" Color="#18181B" />
+
+    <SolidColorBrush x:Key="PrimaryButtonIdleBackgroundBrush" Color="#EFF3F4" />
+    <SolidColorBrush x:Key="PrimaryButtonHoverBackgroundBrush" Color="#D7DBDC" />
+
+    <SolidColorBrush x:Key="SecondaryButtonIdleBackgroundBrush" Color="#18181B" />
+    <SolidColorBrush x:Key="SecondaryButtonHoverBackgroundBrush" Color="#242427" />
+    <SolidColorBrush x:Key="SecondaryButtonBrush" Color="#E7E9EA" />
+
+    <SolidColorBrush x:Key="DisabledBrush" Color="#323236" />
+    <SolidColorBrush x:Key="LinkButtonBrush" Color="#6800D1" />
+    <SolidColorBrush x:Key="PromptBrush" Color="#999999" />
+    <SolidColorBrush x:Key="SubtalBrush" Color="#888991" />
+    <SolidColorBrush x:Key="SubtalBrushLighter" Color="#9d9ea5" />
+    <SolidColorBrush x:Key="IdleBrush" Color="#E7E9EA" />
+    <SolidColorBrush x:Key="HoverBrush" Color="#E7E9EA" />
+    <SolidColorBrush x:Key="SelectedBrush" Color="#E7E9EA" />
+
+    <SolidColorBrush x:Key="AccentDisabledBrush" Color="#024DA3" />
+    <SolidColorBrush x:Key="FavBrush" Color="Yellow" />
+
+    <SolidColorBrush x:Key="TextBrush" Color="{DynamicResource TextColor}" />
+    <SolidColorBrush x:Key="TextBrushDarker" Color="{DynamicResource TextColorDarker}" />
+    <SolidColorBrush x:Key="TextBrushDark" Color="{DynamicResource TextColorDark}" />
+    <SolidColorBrush x:Key="NormalBrush" Color="#2918181B" />
+    <SolidColorBrush x:Key="NormalBrushDark" Color="Transparent" />
+    <SolidColorBrush x:Key="NormalBorderBrush" Color="Transparent" />
+    <SolidColorBrush x:Key="HighlightGlyphBrush" Color="{DynamicResource HighlightGlyphColor}" />
+
+    <SolidColorBrush x:Key="TooltipBackgroundBrush" Color="{DynamicResource BackgroundToneColor}" />
+    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="#0a0e1e" />
+    <SolidColorBrush x:Key="GridItemBackgroundBrush" Color="{DynamicResource GridItemBackgroundColor}" />
+    
+    <SolidColorBrush x:Key="WindowPanelSeparatorBrush" Color="Transparent" />
+    
+    <SolidColorBrush x:Key="PanelSeparatorBrush" Color="{DynamicResource PanelSeparatorColor}" />
+
+    <SolidColorBrush x:Key="CardSeparatorBrush" Color="{DynamicResource PanelSeparatorColor}" />
+    <SolidColorBrush x:Key="CardBackgroundBrush" Color="#18181B" />
+    <SolidColorBrush x:Key="CardBorderBrush" Color="#D4D0B8" />
+
+    <SolidColorBrush x:Key="CheckBoxCheckMarkBkBrush" Color="{DynamicResource MainColorDark}" />
+    <SolidColorBrush x:Key="CheckBoxBorderBrush" Color="#5C5C60" />
+    <SolidColorBrush x:Key="CheckBoxBorderHoverBrush" Color="#707075" />
+    <SolidColorBrush x:Key="DataChangeNotifBrush" Color="{DynamicResource DataChangeNotifColor}" />
+
+    <SolidColorBrush x:Key="PositiveRatingBrush" Color="#01875F" />
+    <SolidColorBrush x:Key="NegativeRatingBrush" Color="#C7212D" />
+    <SolidColorBrush x:Key="MixedRatingBrush" Color="#f5C518" />
+
+    <SolidColorBrush x:Key="WarningBrush" Color="#ff6b6b" />
+
+    <LinearGradientBrush x:Key="ExpanderBackgroundBrush" StartPoint="-0.1,0.5" EndPoint="1.2,1" >
+        <GradientStop Color="#FF2C3A67" Offset="0"/>
+        <GradientStop Color="#002C3A67" Offset="0.7"/>
+    </LinearGradientBrush>
+
+    <ImageBrush x:Key="WindowImageBackgroundBrush">
+        <ImageBrush.ImageSource>
+            <BitmapImage UriSource="Images/GBackground.png"/>
+        </ImageBrush.ImageSource>
+    </ImageBrush>
+
+    <ImageBrush x:Key="WindowImageBackgroundBrush1">
+        <ImageBrush.ImageSource>
+            <BitmapImage UriSource="Images/MainBackground.png"/>
+        </ImageBrush.ImageSource>
+    </ImageBrush>
+
+    <LinearGradientBrush x:Key="TitleOverlayGradient" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#CC000000" Offset="0" />
+        <GradientStop Color="#00000000" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="SuccessStoryListGradient" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#FF18181B" Offset="0" />
+        <GradientStop Color="#0018181B" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="SuccessStoryBtmGradient" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#0018181B" Offset="0" />
+        <GradientStop Color="#0018181B" Offset="0.50" />
+        <GradientStop Color="#FF18181B" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="SuccessStoryCompactGradient" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="#00000000" Offset="0" />
+        <GradientStop Color="#00000000" Offset="0.5" />
+        <GradientStop Color="#FF000000" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="DescriptionBtmGradient" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#00000000" Offset="0" />
+        <GradientStop Color="#FF000000" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="GridOverlayGradient" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#00000000" Offset="0"/>
+        <GradientStop Color="#00000000" Offset="0.5"/>
+        <GradientStop Color="#F2000000" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="DetailsListSelectedGradient" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="{DynamicResource AccentIdleColor}" Offset="0.0" />
+        <GradientStop Color="{DynamicResource AccentIdleColor}" Offset="0.01" />
+        <GradientStop Color="#00FFFFFF" Offset="0.01" />
+        <GradientStop Color="#26FFFFFF" Offset="1.0" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="SteamButtonBrush" StartPoint="0,0" EndPoint="1,0" >
+        <GradientStop Color="#FF101d2f" Offset="0"/>
+        <GradientStop Color="#FF1383b4" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="SteamButtonBrushMono" StartPoint="0,0" EndPoint="1,0" >
+        <GradientStop Color="#FF18181B" Offset="0"/>
+        <GradientStop Color="#FF323236" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="PlayButtonBackgroundBrush" StartPoint="0.5,0" EndPoint="0.5,1" >
+        <GradientStop Color="#FF04A5FF" Offset="0"/>
+        <GradientStop Color="#FF0379FF" Offset="1"/>
+    </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="PlayButtonBackgroundHoverBrush" Color="#FF0379FF" />
+
+    <LinearGradientBrush x:Key="InstallButtonBackgroundBrush" StartPoint="0.5,0" EndPoint="0.5,1" >
+        <GradientStop Color="#4ad968" Offset="0"/>
+        <GradientStop Color="#34c759" Offset="1"/>
+    </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="InstallButtonBackgroundHoverBrush" Color="#34c759" />
+    
+    <LinearGradientBrush x:Key="WindowBackgroundBrush" StartPoint="0.5,-0.2" EndPoint="0.5,1" >
+        <GradientStop Color="#000000" Offset="0"/>
+        <GradientStop Color="#000000" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="LightTagBrush" StartPoint="0.5,0" EndPoint="0.5,1" >
+        <GradientStop Color="#3318181B" Offset="0.8"/>
+        <GradientStop Color="#2918181B" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="DarkMaskBrush" StartPoint="0.5,0.4" EndPoint="0.5,1" >
+        <GradientStop Color="#00000000" Offset="0"/>
+        <GradientStop Color="#B2000000" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="LightMaskBrush" StartPoint="0.5,0" EndPoint="0.5,1" >
+        <GradientStop Color="#00000000" Offset="0.2"/>
+        <GradientStop Color="#FF000000" Offset="1"/>
+    </LinearGradientBrush>
+
+    <RadialGradientBrush x:Key="RGLayerBackgroundBrush" GradientOrigin="0.5,1" Center="0.5,1" RadiusX="1" RadiusY="1">
+        <RadialGradientBrush.GradientStops>
+            <GradientStop Color="{DynamicResource 24%White}" Offset="0" />
+            <GradientStop Color="Transparent" Offset="0.8" />
+        </RadialGradientBrush.GradientStops>
+    </RadialGradientBrush>
+
+    <RadialGradientBrush x:Key="RGSelectedBackgroundBrush" GradientOrigin="0.5,1" Center="0.5,1" RadiusX="1" RadiusY="1">
+        <RadialGradientBrush.GradientStops>
+            <GradientStop Color="{DynamicResource 40%White}" Offset="0" />
+            <GradientStop Color="{DynamicResource 24%White}" Offset="0.8" />
+        </RadialGradientBrush.GradientStops>
+    </RadialGradientBrush>
+
+    <RadialGradientBrush x:Key="RGTubeLayerBackgroundBrush" GradientOrigin="0.6,1" Center="0.6,1" RadiusX="1" RadiusY="1">
+        <RadialGradientBrush.GradientStops>
+            <GradientStop Color="{DynamicResource 40%White}" Offset="0" />
+            <GradientStop Color="{DynamicResource 24%White}" Offset="0.8" />
+        </RadialGradientBrush.GradientStops>
+    </RadialGradientBrush>
+
+    <SolidColorBrush x:Key="DetailsViewLibraryHoverBackgroundBrush" Color="#e0646464" />
+
+    <LinearGradientBrush x:Key="DetailsViewLibrarySelectedBackgroundBrush" StartPoint="0.0,0.5" EndPoint="1.0,0.5">
+        <GradientStop Color="#373737" Offset="0.4" />
+        <GradientStop Color="#373737" Offset="0.95" />
+    </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="MenusSeparatorBrush" Color="#242427" />
+    <SolidColorBrush x:Key="MenusHoverBackgroundBrush" Color="#0066da" />
+    <SolidColorBrush x:Key="SearchViewWindowBackgroundBrush" Color="#262626" />
+
+    <ScaleTransform x:Key="UniformScaleTransform" ScaleY="{Binding ScaleX, RelativeSource={RelativeSource Self}}"/>
+
+    <SolidColorBrush x:Key="UserEditableBoxBrush" Color="{DynamicResource UserEditableBoxColor}" Opacity="0.28"/>
+    <Color x:Key="UserEditableBoxColor">#c4cad0</Color>
+
+    <sys:Double x:Key="Zero">0</sys:Double>
+    <sys:Double x:Key="OneD">1</sys:Double>
+    <ElasticEase x:Key="FlyOutEase" Oscillations="1"/>
+
+    <Geometry x:Key="StarShapeGeometry">M10.788 3.103c.495-1.004 1.926-1.004 2.421 0l2.358 4.777 5.273.766c1.107.161 1.549 1.522.748 2.303l-3.816 3.72.901 5.25c.19 1.103-.968 1.944-1.959 1.424l-4.716-2.48-4.715 2.48c-.99.52-2.148-.32-1.96-1.424l.901-5.25-3.815-3.72c-.801-.78-.359-2.142.748-2.303L8.43 7.88l2.358-4.777Z</Geometry>
+
+    <Geometry x:Key="OpenIconGeometry">M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Zm3.25-12.5h-4.74l5.268 5.217a.75.75 0 1 1-1.056 1.066L9.5 10.61v4.639a.75.75 0 0 1-1.5 0v-6.5A.75.75 0 0 1 8.75 8h6.5a.75.75 0 0 1 0 1.5Z</Geometry>
+
+    <Geometry x:Key="PlayIconGeometry">M5 5.274c0-1.707 1.826-2.792 3.325-1.977l12.362 6.726c1.566.853 1.566 3.101 0 3.953L8.325 20.702C6.826 21.518 5 20.432 5 18.726V5.274Z</Geometry>
+
+    <Geometry x:Key="InstallIconGeometry">M5.25 20.5h13.498a.75.75 0 0 1 .101 1.493l-.101.007H5.25a.75.75 0 0 1-.102-1.494l.102-.006h13.498H5.25Zm6.633-18.498L12 1.995a1 1 0 0 1 .993.883l.007.117v12.59l3.294-3.293a1 1 0 0 1 1.32-.083l.094.084a1 1 0 0 1 .083 1.32l-.083.094-4.997 4.996a1 1 0 0 1-1.32.084l-.094-.083-5.004-4.997a1 1 0 0 1 1.32-1.498l.094.083L11 15.58V2.995a1 1 0 0 1 .883-.993L12 1.995l-.117.007Z</Geometry>
+
+    <Geometry x:Key="LoadIconGeometry">M16.052 5.029a1 1 0 0 0 .189 1.401 7.002 7.002 0 0 1-3.157 12.487l.709-.71a1 1 0 0 0-1.414-1.414l-2.5 2.5a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 1.414-1.414l-.843-.842A9.001 9.001 0 0 0 17.453 4.84a1 1 0 0 0-1.401.189Zm-1.93-1.736-2.5-2.5a1 1 0 0 0-1.498 1.32l.083.094.843.843a9.001 9.001 0 0 0-4.778 15.892A1 1 0 0 0 7.545 17.4a7.002 7.002 0 0 1 3.37-12.316l-.708.709a1 1 0 0 0 1.32 1.497l.094-.083 2.5-2.5a1 1 0 0 0 .083-1.32l-.083-.094Z</Geometry>
+
+    <Geometry x:Key="AlertIconGeometry">M9.042 19.003h5.916a3 3 0 0 1-5.916 0Zm2.958-17a7.5 7.5 0 0 1 7.5 7.5v4l1.418 3.16A.95.95 0 0 1 20.052 18h-16.1a.95.95 0 0 1-.867-1.338l1.415-3.16V9.49l.005-.25A7.5 7.5 0 0 1 12 2.004Z</Geometry>
+
+    <Geometry x:Key="CloudIconGeometry">M6.087 9.75a5.752 5.752 0 0 1 11.326 0h.087a4 4 0 0 1 0 8H6a4 4 0 0 1 0-8h.087Z</Geometry>
+
+    <Geometry x:Key="WinSysMinIconGeometry">M 1,5 Q 1,5 9,5</Geometry>
+    <Geometry x:Key="WinSysMaxIconGeometry">M 1,1 Q 1,1 9,1 Q 9,1 9,9 Q 9,9 1,9 Q 1,9 1,1 Z</Geometry>
+    <Geometry x:Key="WinSysCloseIconGeometry">M 1.5,1.5 L 8.5,8.5 M 8.5,1.5 L 1.5,8.5</Geometry>
+
+    <DataTemplate x:Key="StarIconTemplate">
+        <Path Data="{StaticResource StarShapeGeometry}"
+              Stroke="{DynamicResource EmptyStarBrush}" 
+              StrokeThickness="0"
+              SnapsToDevicePixels="True"
+              Fill="{Binding Path=Background, RelativeSource={RelativeSource AncestorType=ContentControl}}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="FiveStarIcons">
+        <StackPanel Orientation="Horizontal">
+            <ContentPresenter ContentTemplate="{StaticResource StarIconTemplate}" />
+            <ContentPresenter ContentTemplate="{StaticResource StarIconTemplate}" Margin="5,0,0,0"/>
+            <ContentPresenter ContentTemplate="{StaticResource StarIconTemplate}" Margin="5,0,0,0"/>
+            <ContentPresenter ContentTemplate="{StaticResource StarIconTemplate}" Margin="5,0,0,0"/>
+            <ContentPresenter ContentTemplate="{StaticResource StarIconTemplate}" Margin="5,0,0,0"/>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="FiveStarScore">
+        <Viewbox HorizontalAlignment="Left" VerticalAlignment="Stretch"
+                 SnapsToDevicePixels="True"
+                 Margin="{Binding Path=Padding, RelativeSource={RelativeSource AncestorType=ContentControl}}">
+            <Grid x:Name="GridScore" Tag="{Binding}"
+                  Visibility="{Binding RelativeSource={RelativeSource Self}, Path=Tag, Converter={StaticResource NullToVisibilityConverter}}">
+                <TextBlock x:Name="StarsOverlayProxy" Visibility="Collapsed"
+                           Text="{Binding ElementName=GridScore, Path=Tag, TargetNullValue=0}" />
+                <Viewbox Width="100" HorizontalAlignment="Left">
+                    <ContentControl Background="{DynamicResource EmptyStarBrush}"
+                                    Foreground="Transparent"
+                                    ContentTemplate="{StaticResource FiveStarIcons}" />
+                </Viewbox>
+                <Border Width="{Binding ElementName=StarsOverlayProxy, Path=Text}" HorizontalAlignment="Left">
+                    <Viewbox Width="100" HorizontalAlignment="Left">
+                        <ContentControl Foreground="{DynamicResource TextBrush}"
+                                        Background="{DynamicResource TextBrush}"
+                                        ContentTemplate="{StaticResource FiveStarIcons}" />
+                    </Viewbox>
+                </Border>
+            </Grid>
+        </Viewbox>
+    </DataTemplate>
+
+</ResourceDictionary>

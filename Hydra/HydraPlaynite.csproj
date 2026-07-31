@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Hydra for Playnite — a LibraryPlugin that imports the Hydra launcher's library.
+
+    Hydra keeps its library in a LevelDB (%APPDATA%\hydralauncher\hydra-db), which
+    has no C# reader worth vendoring and whose values are Snappy-compressed, so the
+    read is done by a small Node helper (dump-library.js) that shells out to
+    `classic-level` — the exact library Hydra itself opens the DB with. This plugin
+    runs that helper and turns its JSON into GameMetadata.
+
+    Build: dotnet build -c Release  ->  bin\Release\net462\HydraPlaynite.dll
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net462</TargetFramework>
+    <!-- IPlayniteAPI.Dialogs returns WPF MessageBox types, so the WPF reference
+         assemblies are needed to compile against it. Playnite is WPF; nothing extra ships. -->
+    <UseWPF>true</UseWPF>
+    <AssemblyName>HydraPlaynite</AssemblyName>
+    <RootNamespace>HydraPlaynite</RootNamespace>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Reference-only: Playnite supplies both at runtime, so neither is copied out. -->
+    <PackageReference Include="PlayniteSDK" Version="6.16.0">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="extension.yaml" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

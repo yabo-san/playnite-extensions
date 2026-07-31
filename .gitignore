@@ -1,0 +1,28 @@
+# Build output — every extension is a .NET project and none of it belongs in git.
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.dll
+*.pdb
+
+# NuGet
+packages/
+*.nupkg
+
+# Playnite packs extensions as .pext for distribution; built artefacts, not source.
+*.pext
+
+# ── Personal, never committed ────────────────────────────────────────────────
+# Carried over from the repo these extensions came out of. Neither has ever been
+# committed anywhere and neither should start here.
+GRIFTING.md
+linkedin-handoff.md
+linkedin-canon.md
+dev/linkedin-handoff.md
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp

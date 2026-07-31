@@ -1,0 +1,87 @@
+# playnite-extensions
+
+Playnite extensions and themes. Playnite is the hub; each extension teaches it
+about one thing it does not already know.
+
+These lived in `yabo-san/yabo-launcher` (checked out locally as `ports-launcher`),
+which is a **fork of SirDiabo/GithubLauncher**. That was a problem beyond the
+confusing name: a GithubLauncher *extension* sitting inside a fork *of*
+GithubLauncher is a trap, and nothing here could ever be published without
+dragging someone else's git history along. The standalone launcher is not being
+rebuilt, so the live work moved out and the old repo keeps the frozen launcher.
+
+History was not carried across — it is a fork's history, not this project's. What
+matters is in the commit messages, and the originals remain in the old repo.
+
+## Library extensions
+
+Each imports one launcher's games. All are `Type: GameLibrary`, reference only
+the Playnite SDK, and are independent of each other.
+
+| | reads | state |
+|---|---|---|
+| **RohanKar** | the install folder | works — 19 games |
+| **Hydra** | its LevelDB, via a Node helper | works — 5 entries |
+| **GithubLauncher** | its own CLI (`--list` / `--run`) | 0.9 — see below |
+| **YaboLibrary** | the yabo gate/staging engine | from the launcher era |
+
+**RohanKar** deliberately does not read `library.db`. On a real install every
+table in it is empty while the games sit on disk — it only records what RohanKar
+itself installed. So the folder is the source of truth. Picking *which* `.exe` is
+the game is the actual work: repack folders hold up to a dozen, and the game is
+often not the biggest (PhysX outweighs `Blur.exe`; a Games For Windows Live
+installer outweighs Lost Planet 2). `ExePicker` scores candidates on title match,
+folder depth and known-runtime patterns, with size only breaking ties. Every
+runner-up is attached as a secondary action, so a wrong guess is one right-click
+to fix.
+
+**Hydra** delegates the read to Node because its LevelDB values are
+Snappy-compressed and there is no .NET reader worth vendoring; the helper uses
+`classic-level`, the same library Hydra opens the database with. Hydra must be
+closed during a refresh — LevelDB takes an exclusive lock — and the plugin checks
+for the process and says so rather than failing obscurely.
+
+**GithubLauncher** drives the launcher's own documented CLI rather than its files,
+because `--run <name>` updates the game before launching and a raw path cannot.
+It is 0.9 for one honest reason: the CLI is verified, but the *shape* of `--list`
+output with games in it is not, because the library it was built against is
+empty. Parsing lives in `ListParser` with no Playnite dependency so it can be run
+standalone against captured output, and the raw output is logged so the first real
+run reveals the true format instead of failing quietly.
+
+## Other extensions
+
+- **GlazeWM** — `GenericPlugin`. Right-click a game and send it to a screen. Writes
+  a `display:<monitor>` tag that a Playnite global script reads to strip window
+  chrome and place the game via the tiling WM. It never changes the primary
+  display, and it leaves alone any game carrying Display Helper's own tag, so
+  Display Helper stays the fallback for titles needing exclusive fullscreen.
+- **YaboDev** — dev-side tagging that feeds the gate.
+- **YaboGlass** — ShaderGlass-era overlay control. **Superseded**; shaders moved to
+  native GLSL. Kept so it is not lost, not because it is current.
+
+## Themes
+
+- **YaboTheme** — "Mythos Cider" 2.0, the fork actually in use.
+- **MythosFast** — "Mythos (Fast)" 2.0, the upstream it forks from, vendored for
+  diffing.
+
+## Building
+
+Each extension is a standalone project:
+
+```
+cd GlazeWM
+dotnet build -c Release      # -> bin\Release\net462\<Name>.dll
+```
+
+Deploy by copying the `.dll` and `extension.yaml` into
+`%APPDATA%\Playnite\Extensions\<Name>\`, then restart Playnite.
+
+Themes are XAML and need no build — copy the folder into
+`%APPDATA%\Playnite\Themes\Desktop\<Name>\`.
+
+## Publishing
+
+Nothing here is published. Each extension is self-contained precisely so that any
+one of them *could* be, without untangling it from the rest.

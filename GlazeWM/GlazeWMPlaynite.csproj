@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    GlazeWM for Playnite — a standalone GenericPlugin.
+
+    Right-click a game -> send it to a screen. Writes a `display:<monitor>` tag
+    that the Playnite global "Game started" script reads to strip the window
+    chrome and place the game there via a tiling WM.
+
+    Generic on purpose: nothing here is specific to any particular library,
+    launcher, or catalog. It references only the Playnite SDK, so it drops into
+    any Playnite install and is a `git mv` away from its own repository.
+
+    Build: dotnet build -c Release  ->  bin\Release\net462\GlazeWMPlaynite.dll
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net462</TargetFramework>
+    <!-- No UI of our own, but IPlayniteAPI.Dialogs returns WPF MessageBoxResult /
+         MessageBoxImage, so the WPF reference assemblies are needed to compile
+         against it. Playnite is a WPF app, so nothing extra ships. -->
+    <UseWPF>true</UseWPF>
+    <AssemblyName>GlazeWMPlaynite</AssemblyName>
+    <RootNamespace>GlazeWMPlaynite</RootNamespace>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Reference-only: Playnite supplies both at runtime, so neither is copied out. -->
+    <PackageReference Include="PlayniteSDK" Version="6.16.0">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="extension.yaml" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>
+

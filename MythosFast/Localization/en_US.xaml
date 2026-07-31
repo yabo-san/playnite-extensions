@@ -1,0 +1,67 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- {DynamicResource LOCMythos_} -->
+
+    <sys:String x:Key="LOCAddonChangesRestart">⠀</sys:String>
+    <sys:String x:Key="LOCSettingsRestartNotification">⠀</sys:String>
+
+    <sys:String x:Key="LOCVersionLabel">Play Button</sys:String>
+    <sys:String x:Key="LOCNotesLabel">Synopsis</sys:String>
+
+    <sys:String x:Key="LOCExitAppLabel">Exit Mythos</sys:String>
+    <sys:String x:Key="LOCOpenPlaynite">Open Mythos</sys:String>
+
+    <sys:String x:Key="LOCPlayGame">Launch</sys:String>
+
+    <!--<sys:String x:Key="LOCMenuDownloadMetadata">Download Metadata</sys:String>
+    <sys:String x:Key="LOCOpenMetadataFolder">Open Media Folder</sys:String>
+    <sys:String x:Key="LOCMenuOpenFullscreen">Enter Fullscreen Mode</sys:String>
+    <sys:String x:Key="LOCClearFilters">Clear</sys:String>
+    <sys:String x:Key="LOCHideGame">Hide Game</sys:String>
+    <sys:String x:Key="LOCUnHideGame">Remove from Hidden</sys:String>
+    <sys:String x:Key="LOCMenuAddons">Addons...</sys:String>
+    <sys:String x:Key="LOCMenuSelectRandomGame">Random Game</sys:String>
+    <sys:String x:Key="LOCCreateDesktopShortcut">Add Desktop Shortcut</sys:String>-->
+
+    <sys:String x:Key="LOCMythos_Search">Search</sys:String>
+
+    <sys:String x:Key="LOCMythos_SteamNews">News</sys:String>
+    <sys:String x:Key="LOCMythos_SteamGuides">Guides</sys:String>
+    <sys:String x:Key="LOCMythos_SteamDiscussions">Discussions</sys:String>
+    <sys:String x:Key="LOCMythos_SteamCommunity">Community</sys:String>
+    <sys:String x:Key="LOCMythos_SteamStore">Store Page</sys:String>
+    <sys:String x:Key="LOCMythos_SteamWorkshop">Workshop</sys:String>
+    <sys:String x:Key="LOCMythos_SteamAchievements">Achievements</sys:String>
+
+    <sys:String x:Key="LOCMythos_Close">Close</sys:String>
+    <sys:String x:Key="LOCMythos_Cancel">Cancel</sys:String>
+    <sys:String x:Key="LOCMythos_NothingSelected">Nothing Selected</sys:String>
+
+    <sys:String x:Key="LOCMythos_CompStatus">Status</sys:String>
+    <sys:String x:Key="LOCMythos_UserRating">My Rating</sys:String>
+    <sys:String x:Key="LOCMythos_CriticRating">Critic Ratings</sys:String>
+    <sys:String x:Key="LOCMythos_CommRating">Player Ratings</sys:String>
+    <sys:String x:Key="LOCMythos_PlayTime">Time Played</sys:String>
+    <sys:String x:Key="LOCMythos_RecentActivity">Last Played</sys:String>
+
+    <sys:String x:Key="LOCMythos_ReadMore">Read More</sys:String>
+    <sys:String x:Key="LOCMythos_ReadLess">Read Less</sys:String>
+    <sys:String x:Key="LOCMythos_SocialLinks">Social Links</sys:String>
+
+    <sys:String x:Key="LOCMythos_Tags">Tags:</sys:String>
+
+    <sys:String x:Key="LOCMythos_AchievementsTitle">Achievements</sys:String>
+    <sys:String x:Key="LOCMythos_ShowAll">View All</sys:String>
+    <sys:String x:Key="LOCMythos_Unlocked">You've Unlocked:</sys:String>
+    <sys:String x:Key="LOCMythos_Of">of</sys:String>
+
+    <sys:String x:Key="LOCMythos_Edit">Settings</sys:String>
+    <sys:String x:Key="LOCMythos_More">Manage</sys:String>
+
+    <sys:String x:Key="LOCMythos_HLTB_Main">Main Story</sys:String>
+    <sys:String x:Key="LOCMythos_HLTB_MainPlus">Main Story +</sys:String>
+    <sys:String x:Key="LOCMythos_HLTB_Completionist">Completionist</sys:String>
+
+</ResourceDictionary>

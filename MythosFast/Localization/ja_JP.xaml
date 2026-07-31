@@ -1,0 +1,42 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:String x:Key="LOCVersionLabel">プレイボタン</sys:String>
+    <sys:String x:Key="LOCNotesLabel">あらすじ</sys:String>
+    <sys:String x:Key="LOCExitAppLabel">Mythosを終了</sys:String>
+    <sys:String x:Key="LOCOpenPlaynite">Mythosを開く</sys:String>
+
+    <sys:String x:Key="LOCPlayGame">起動</sys:String>
+
+    <sys:String x:Key="LOCMythos_Search">検索</sys:String>
+    <sys:String x:Key="LOCMythos_SteamNews">ニュース</sys:String>
+    <sys:String x:Key="LOCMythos_SteamGuides">ガイド</sys:String>
+    <sys:String x:Key="LOCMythos_SteamDiscussions">ディスカッション</sys:String>
+    <sys:String x:Key="LOCMythos_SteamCommunity">コミュニティ</sys:String>
+    <sys:String x:Key="LOCMythos_SteamStore">ストアページ</sys:String>
+    <sys:String x:Key="LOCMythos_SteamWorkshop">ワークショップ</sys:String>
+    <sys:String x:Key="LOCMythos_SteamAchievements">実績</sys:String>
+    <sys:String x:Key="LOCMythos_Close">閉じる</sys:String>
+    <sys:String x:Key="LOCMythos_Cancel">キャンセル</sys:String>
+    <sys:String x:Key="LOCMythos_NothingSelected">未選択</sys:String>
+    <sys:String x:Key="LOCMythos_CompStatus">ステータス</sys:String>
+    <sys:String x:Key="LOCMythos_UserRating">マイレーティング</sys:String>
+    <sys:String x:Key="LOCMythos_CriticRating">批評家レーティング</sys:String>
+    <sys:String x:Key="LOCMythos_CommRating">プレイヤーレーティング</sys:String>
+    <sys:String x:Key="LOCMythos_PlayTime">プレイ時間</sys:String>
+    <sys:String x:Key="LOCMythos_RecentActivity">最終プレイ</sys:String>
+    <sys:String x:Key="LOCMythos_ReadMore">続きを読む</sys:String>
+    <sys:String x:Key="LOCMythos_ReadLess">閉じる</sys:String>
+    <sys:String x:Key="LOCMythos_SocialLinks">ソーシャルリンク</sys:String>
+    <sys:String x:Key="LOCMythos_Tags">タグ:</sys:String>
+    <sys:String x:Key="LOCMythos_AchievementsTitle">実績</sys:String>
+    <sys:String x:Key="LOCMythos_ShowAll">すべて表示</sys:String>
+    <sys:String x:Key="LOCMythos_Unlocked">解除済み:</sys:String>
+    <sys:String x:Key="LOCMythos_Of">/</sys:String>
+    <sys:String x:Key="LOCMythos_Edit">設定</sys:String>
+    <sys:String x:Key="LOCMythos_More">管理</sys:String>
+    <sys:String x:Key="LOCMythos_HLTB_Main">メインストーリー</sys:String>
+    <sys:String x:Key="LOCMythos_HLTB_MainPlus">メインストーリー+</sys:String>
+    <sys:String x:Key="LOCMythos_HLTB_Completionist">コンプリート</sys:String>
+</ResourceDictionary>

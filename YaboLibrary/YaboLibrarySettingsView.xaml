@@ -1,0 +1,29 @@
+<UserControl x:Class="YaboLibrary.YaboLibrarySettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             d1p1:Ignorable="d"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006">
+    <!-- DataContext is the YaboLibrarySettingsViewModel; bindings target its .Settings. -->
+    <StackPanel Margin="20">
+        <TextBlock Text="Yabo Launcher engine"
+                   FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+
+        <TextBlock Text="Path to yabo-launcher.exe" Margin="0,0,0,4"/>
+        <TextBox Text="{Binding Settings.ExePath, UpdateSourceTrigger=PropertyChanged}"
+                 Margin="0,0,0,12"/>
+
+        <TextBlock Text="Path to isnesrev.exe (optional — snesrev shader/controls editor)" Margin="0,0,0,4"/>
+        <TextBox Text="{Binding Settings.IsnesrevPath, UpdateSourceTrigger=PropertyChanged}"
+                 Margin="0,0,0,4"/>
+        <TextBlock TextWrapping="Wrap" Opacity="0.7" Margin="0,0,0,12"
+                   Text="Leave blank to use the default beside the engine (&lt;engineDir&gt;\isnesrev\isnesrev.exe). Powers the 'Configure GLSL' / 'Configure Controls' actions on snesrev-native cards."/>
+
+        <CheckBox Content="Import hidden ports"
+                  IsChecked="{Binding Settings.ImportHidden}"
+                  Margin="0,0,0,8"/>
+
+        <TextBlock TextWrapping="Wrap" Opacity="0.7"
+                   Text="The plugin shells out to this exe (--list-json / --download / --uninstall / --play). It must be the yabo-launcher build that ships the catalog."/>
+    </StackPanel>
+</UserControl>

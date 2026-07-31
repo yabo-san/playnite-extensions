@@ -1,0 +1,26 @@
+Id: RohanKar_ecc7bf2f-5416-49d4-88c6-648397ed2668
+Name: RohanKar
+Author: kevin
+Version: 1.0
+Module: RohanKarPlaynite.dll
+Type: GameLibrary
+Description: >
+  Imports RohanKar's installed games into Playnite.
+
+  It scans the install folder rather than reading RohanKar's library.db, because
+  on a real install that database is empty - every table, zero rows - while the
+  games sit on disk. The database only records what RohanKar itself installed, so
+  it says nothing about a library assembled any other way. The folder is the truth.
+
+  The install path is read from RohanKar's own settings.json, so it follows your
+  configuration instead of being hardcoded.
+
+  Repack folders hold anywhere from zero to a dozen executables, and the game is
+  frequently not the biggest one - PhysX outweighs Blur, a Games For Windows Live
+  installer outweighs Lost Planet 2. Candidates are scored on title match, folder
+  depth and known-runtime patterns, with size used only to break ties. Every
+  runner-up is attached as a secondary action, so a wrong guess is one right-click
+  to fix.
+
+  Folders with nothing launchable - empty, or holding only installers - are
+  imported as NOT installed rather than given a dead Play button.

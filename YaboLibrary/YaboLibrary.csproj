@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Yabo Launcher — Playnite Library plugin (GameLibrary).
+    Targets .NET Framework 4.6.2 (the Playnite plugin ABI) and produces YaboLibrary.dll.
+
+    OWNER TODO:
+      * Pin the PlayniteSDK version. We leave it floating ("*") below so a restore
+        picks the latest, but Playnite plugins should be built against the SDK
+        version matching the target Playnite release. Replace "*" with an explicit
+        version (e.g. 6.11.0) and verify the API names noted in the README.
+      * Build with `dotnet build -c Release` (or msbuild) — produces bin\Release\net462\YaboLibrary.dll.
+      * Then pack with Toolbox: `Toolbox.exe pack <this-dir> <out-dir>` → .pext.
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net462</TargetFramework>
+    <!-- The settings view is a WPF UserControl (XAML + code-behind), and the plugin returns it
+         from GetSettingsView, so the project needs the WPF surface (PresentationFramework etc.). -->
+    <UseWPF>true</UseWPF>
+    <AssemblyName>YaboLibrary</AssemblyName>
+    <RootNamespace>YaboLibrary</RootNamespace>
+    <!-- Playnite loads the bare DLL; no app host / runtimeconfig needed. -->
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Pinned to 6.16.0 — latest stable on nuget.org and the exact SDK version that ships with
+         the installed Playnite (Playnite.SDK.dll 6.16.0.0). PlayniteSDK is reference-only;
+         Playnite supplies it at runtime, so it must NOT be copied to the output dir. -->
+    <PackageReference Include="PlayniteSDK" Version="6.16.0">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <!-- Newtonsoft.Json is supplied by Playnite at runtime; reference-only here too.
+         Pinned to the version Playnite ships (13.x) so the plugin binds against the same ABI. -->
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Ship the manifest + assets alongside the DLL so Toolbox can pack the folder. -->
+    <None Update="extension.yaml" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="icon.png" CopyToOutputDirectory="PreserveNewest" Condition="Exists('icon.png')" />
+  </ItemGroup>
+
+</Project>
