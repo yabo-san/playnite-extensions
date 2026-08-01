@@ -1,0 +1,87 @@
+/* iSNESrev — Cider-grounded tokens (subset of yabo-ui styles.css). Dark, glassy, focused. */
+:root{
+  color-scheme: dark;
+  --keyColor:#fc3c44;
+  --base:#1e1e1e; --elevated:#262628; --panel:#2a2a2c;
+  --text:#f5f5f7; --text2:#98989f; --border:rgba(255,255,255,.08);
+  --radCard:14px; --radCtl:6px; --radPanel:12px;
+  --ease:cubic-bezier(0.42,0,0.58,1);
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font:13px -apple-system,"Segoe UI Variable Text","Segoe UI",sans-serif;color:var(--text);background:var(--base)}
+.app{display:flex;flex-direction:column;gap:16px;padding:20px;min-height:100vh;overflow-y:auto}
+
+.topbar{display:flex;align-items:center;gap:14px}
+.brand{font-weight:800;font-size:22px;letter-spacing:-.5px}
+.brand span{color:var(--keyColor)}
+.subtitle{color:var(--text2);font-size:13px;flex:1}
+
+.btn{background:rgba(255,255,255,.1);color:var(--text);border:1px solid var(--border);border-radius:var(--radCtl);padding:7px 14px;font:inherit;cursor:pointer;transition:background .12s var(--ease)}
+.btn:hover{background:rgba(255,255,255,.18)}
+.btn-ghost{background:transparent}
+.btn-primary{background:var(--keyColor);border-color:transparent;color:#fff}
+
+/* drag-a-ROM dropzone */
+.dropzone{border:2px dashed var(--border);border-radius:var(--radCard);background:var(--elevated);
+  min-height:150px;display:flex;align-items:center;justify-content:center;text-align:center;
+  transition:border-color .15s var(--ease),background .15s var(--ease)}
+.dropzone.drag{border-color:var(--keyColor);background:rgba(252,60,68,.08)}
+.dropzone.busy{opacity:.7;pointer-events:none}
+.dz-icon{font-size:36px;opacity:.7}
+.dz-title{font-size:16px;font-weight:600;margin-top:6px}
+.dz-hint{color:var(--text2);font-size:12px;margin-top:6px;max-width:560px}
+
+.result{background:#111;border:1px solid var(--border);border-radius:var(--radPanel);
+  padding:12px 14px;font:12px/1.5 "Cascadia Code","Consolas",monospace;color:#d6d6d6;
+  white-space:pre-wrap;max-height:220px;overflow-y:auto;margin:0}
+.result.ok{border-left:3px solid #28c840}
+.result.err{border-left:3px solid #ff5f57}
+
+/* library grid */
+.library{margin-top:4px}
+.lib-head{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.lib-head h2{font-size:15px;margin:0;flex:1}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.empty{color:var(--text2);padding:20px}
+.card{background:var(--elevated);border:1px solid var(--border);border-radius:var(--radCard);overflow:hidden;display:flex;flex-direction:column}
+.card .art{aspect-ratio:3/4;background:#000 center/cover no-repeat;background-color:#333}
+.card .meta{padding:8px 10px}
+.card .name{font-weight:600;font-size:13px;line-height:1.2}
+.card .status{font-size:11px;margin-top:4px;color:var(--text2)}
+.card .status.installed{color:#28c840}
+
+.card{cursor:pointer;transition:border-color .12s var(--ease),transform .12s var(--ease)}
+.card:hover{border-color:var(--keyColor);transform:translateY(-2px)}
+
+/* ===================== game view ===================== */
+.game-head{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.game-art{width:54px;height:72px;border-radius:8px;background:#000 center/cover no-repeat;background-color:#333;flex:none}
+.game-title h2{margin:0;font-size:18px}
+.game-sub{color:var(--text2);font-size:12px;margin-top:2px}
+
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--border);margin:8px 0 16px}
+.tab{background:transparent;color:var(--text2);border:none;border-bottom:2px solid transparent;padding:8px 14px;font:inherit;cursor:pointer}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--text);border-bottom-color:var(--keyColor)}
+
+.tabpane{max-width:720px}
+.hint{color:var(--text2);font-size:12px;line-height:1.55;margin:0 0 14px}
+.hint code{background:rgba(255,255,255,.08);padding:1px 5px;border-radius:4px;color:#e6e6e6}
+.row{display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
+.msg{font-size:12px;color:var(--text2)}
+.msg.ok{color:#28c840}
+.msg.err{color:#ff5f57}
+
+.sel{background:rgba(100,100,100,.25);color:var(--text);border:1px solid var(--border);border-radius:var(--radCtl);padding:7px 12px;font:inherit;outline:none;cursor:pointer;min-width:240px}
+.sel option{background:#2a2a2c;color:var(--text)}
+
+/* keybind editor: clickable button slots (click → capture a key) */
+.keymap-editor{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.kb-slot{display:flex;justify-content:space-between;align-items:center;gap:10px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:7px;padding:8px 12px;font:inherit;color:var(--text);cursor:pointer;transition:border-color .12s var(--ease),background .12s var(--ease)}
+.kb-slot:hover{border-color:var(--keyColor)}
+.kb-slot b{color:var(--keyColor);font-weight:700}
+.kb-slot .kb-key{color:var(--text);font-family:"Cascadia Code","Consolas",monospace;font-size:12px}
+.kb-slot.capturing{border-color:var(--keyColor);background:rgba(252,60,68,.12)}
+.kb-slot.capturing .kb-key{color:var(--keyColor)}
+.kb{background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:5px;padding:4px 8px;font-size:11px;color:var(--text2)}

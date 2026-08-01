@@ -47,11 +47,26 @@ Read in this order:
 - `Services/BpsPatchService.cs` — BPS patching, needed by the SNES decomp ports.
 - `Services/FeedSyncService.cs` — the publish/subscribe catalog feed.
 
+## isnesrev
+
+`isnesrev/` is here too, and it is a different case — see its `SALVAGE.md`.
+
+It was a standalone Tauri app for the SNES-reimplementation shelf, deliberately
+NOT yabo-launcher, built around "drag a SNES ROM in → it becomes a playable
+game". Its Tauri shell is retired along with every other standalone launcher UI,
+but it called this engine's `--ingest` / `--list-json` / gate, so the two halves
+only make sense together.
+
+The part worth reviving is its **rebindable keybind UI** — these reimplementation
+ports notoriously cannot rebind keys (`zelda3.ini` has a hand-edited `[KeyMap]`),
+nothing else solves it, and solving it does not require an app. It wants to be a
+Playnite extension in the same mould as GlazeWM.
+
 ## What was NOT salvaged
 
-The Tauri UI (`ui/`), the admin console, the installer, `isnesrev/`, the shaders
-and the assets all stay in the old repo. They are the parts that made it an
-application, and the application is what is being retired.
+The Tauri UI (`ui/`), the admin console, the installer, the shaders and the
+assets all stay in the old repo. They are the parts that made it an application,
+and the application is what is being retired.
 
 The old repo is not deleted — this is a hedge against it being cleaned up later,
 not a replacement for it.

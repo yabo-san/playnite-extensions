@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iSNESrev</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">i<span>SNES</span>rev</div>
+      <div class="subtitle">drag a SNES ROM in — it becomes playable</div>
+      <button id="pickBtn" class="btn">Pick a ROM…</button>
+    </header>
+
+    <!-- ===================== HOME VIEW: drag-in + library shelf ===================== -->
+    <main id="homeView">
+      <!-- Drag-a-ROM target: the whole drop zone forwards the dropped file to `--ingest`. -->
+      <section id="dropzone" class="dropzone">
+        <div class="dz-inner">
+          <div class="dz-icon">⤓</div>
+          <div class="dz-title">Drop a SNES ROM here</div>
+          <div class="dz-hint">zelda3.sfc · smw.sfc · smas.sfc · sm.smc — identified by SHA-1, installed &amp; patched automatically</div>
+        </div>
+      </section>
+
+      <!-- Live result of the last ingest (engine stdout/stderr, streamed). -->
+      <pre id="result" class="result" hidden></pre>
+
+      <!-- Library grid: the snesrev reimplementation shelf, from `--list-json`. Click a card → configure. -->
+      <section class="library">
+        <div class="lib-head">
+          <h2>SNES Reimplementation Shelf</h2>
+          <button id="refreshBtn" class="btn btn-ghost">Refresh</button>
+        </div>
+        <div id="grid" class="grid"><div class="empty">Loading…</div></div>
+      </section>
+    </main>
+
+    <!-- ===================== GAME VIEW: per-game config (controls / shaders / play) ===================== -->
+    <main id="gameView" hidden>
+      <div class="game-head">
+        <button id="backBtn" class="btn btn-ghost">← Shelf</button>
+        <div class="game-art" id="gameArt"></div>
+        <div class="game-title">
+          <h2 id="gameName">—</h2>
+          <div class="game-sub" id="gameStatus"></div>
+        </div>
+      </div>
+
+      <nav class="tabs" role="tablist">
+        <button class="tab" data-tab="controls">Controls</button>
+        <button class="tab" data-tab="shaders">Shader</button>
+        <button class="tab" data-tab="play">Play</button>
+      </nav>
+
+      <!-- (controls) Keybind editor — click a slot to capture a key, writes [KeyMap] Controls via --set-config -->
+      <section class="tabpane" id="tab-controls" hidden>
+        <p class="hint">Click a button slot, then press a key to rebind it. Changes are saved to the
+          port's <code>.ini</code> immediately (<code>[KeyMap] Controls</code>).</p>
+        <div id="keymapEditor" class="keymap-editor"></div>
+        <div class="row">
+          <button id="keymapResetBtn" class="btn btn-ghost" title="Reload from the .ini, discarding unsaved capture">Reload</button>
+          <span id="keymapMsg" class="msg"></span>
+        </div>
+      </section>
+
+      <!-- (shaders) GLSL shader picker — on pick writes Graphics.Shader via --set-config -->
+      <section class="tabpane" id="tab-shaders" hidden>
+        <p class="hint">Pick a built-in GLSL shader for this port's OpenGL renderer. Saved to
+          <code>Graphics.Shader</code> on selection.</p>
+        <select id="shaderPicker" class="sel"><option>Loading shaders…</option></select>
+        <span id="shaderMsg" class="msg"></span>
+      </section>
+
+      <!-- (play) Launch + create a non-Steam Steam shortcut -->
+      <section class="tabpane" id="tab-play" hidden>
+        <p class="hint">Launch the game, or add it to Steam as a non-Steam shortcut so it shows up in
+          Steam (and Playnite via Steam import).</p>
+        <div class="row">
+          <button id="playBtn" class="btn btn-primary">▶ Play</button>
+          <button id="steamBtn" class="btn">＋ Create Steam shortcut</button>
+        </div>
+        <pre id="playResult" class="result" hidden></pre>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
