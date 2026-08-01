@@ -92,6 +92,20 @@ namespace GlazeWMPlaynite
                                           && !n.Equals("exclusive", StringComparison.OrdinalIgnoreCase));
                 }
 
+                // OPT-IN ONLY. An untagged game is left completely alone - no
+                // primary switch, no workspace moves, nothing. Doing things to
+                // games nobody asked about caused more damage than it fixed: it
+                // shunted workspaces off monitors they could not be returned to,
+                // and fought games over windows they were never going to give up.
+                //
+                // An untagged game must be indistinguishable from this extension
+                // not being installed.
+                if (string.IsNullOrEmpty(named))
+                {
+                    Logger.Info($"GlazeWM: {game.Name} has no display: tag — leaving it alone.");
+                    return;
+                }
+
                 MonitorHandover.Claim(game.Id, game.Name, named);
             }
             catch (Exception ex)
