@@ -43,6 +43,10 @@ namespace GlazeWMPlaynite
             public int FromMonitor;
         }
 
+        /// <summary>The primary display before we changed it, so it can be put back.</summary>
+        private static readonly Dictionary<Guid, string> PriorPrimary =
+            new Dictionary<Guid, string>();
+
         // ─── talking to GlazeWM ──────────────────────────────────────────────
 
         private static string Run(params string[] args)
@@ -176,6 +180,34 @@ namespace GlazeWMPlaynite
             if (mons.Count == 0) return;
 
             int target = NamedIndex(mons, explicitMonitor);
+
+            // A NAMED screen means the user picked one, so MAKE IT PRIMARY. That is
+            // the only thing that reliably decides where a game opens - a game that
+            // pins its own window pins it to (0,0), which is the primary by
+            // definition. It is also all Display Helper ever did, so doing it here
+            // means the user picks "acer" rather than \\.\DISPLAY2, a GDI name that
+            // means nothing to a human and gets renumbered by driver resets.
+            if (target >= 0)
+            {
+                var w = (int?)mons[target]["width"] ?? 0;
+                var h = (int?)mons[target]["height"] ?? 0;
+                var device = PrimaryDisplay.DeviceForResolution(w, h);
+                var before = PrimaryDisplay.Current();
+
+                if (device != null && !string.Equals(device, before, StringComparison.OrdinalIgnoreCase))
+                {
+                    if (PrimaryDisplay.Set(device))
+                    {
+                        lock (PriorPrimary) { PriorPrimary[gameId] = before; }
+                        Logger.Info($"GlazeWM: made {device} primary for {gameName} (was {before}).");
+                        // The desktop just moved; re-read it before touching workspaces.
+                        System.Threading.Thread.Sleep(1200);
+                        mons = Monitors();
+                        target = NamedIndex(mons, explicitMonitor);
+                    }
+                }
+            }
+
             if (target < 0) target = PrimaryIndex(mons);
             if (target < 0)
             {
@@ -218,6 +250,22 @@ namespace GlazeWMPlaynite
         /// <summary>Put back exactly what we moved, and nothing else.</summary>
         public static void Release(Guid gameId, string gameName)
         {
+            // Put the primary display back FIRST. Everything else is expressed in
+            // desktop coordinates, and changing the primary moves them all.
+            string before = null;
+            lock (PriorPrimary)
+            {
+                if (PriorPrimary.TryGetValue(gameId, out before)) PriorPrimary.Remove(gameId);
+            }
+            if (!string.IsNullOrEmpty(before))
+            {
+                if (PrimaryDisplay.Set(before))
+                {
+                    Logger.Info($"GlazeWM: primary display returned to {before} after {gameName}.");
+                    System.Threading.Thread.Sleep(1200);
+                }
+            }
+
             List<Displaced> moved;
             lock (Held)
             {
