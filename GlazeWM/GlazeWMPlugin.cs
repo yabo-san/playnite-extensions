@@ -35,6 +35,7 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using Playnite.SDK;
+using Playnite.SDK.Events;
 using Playnite.SDK.Models;
 using Playnite.SDK.Plugins;
 
@@ -53,6 +54,66 @@ namespace GlazeWMPlaynite
         public GlazeWMPlugin(IPlayniteAPI api) : base(api)
         {
             Properties = new GenericPluginProperties { HasSettings = false };
+        }
+
+        /// <summary>
+        /// A game started: hand it the monitor it is going to take.
+        ///
+        /// This is the whole feature, and it runs INSIDE the plugin — no global
+        /// scripts, no PowerShell, no Python, nothing to paste into Playnite's
+        /// settings. Install the extension and it works.
+        ///
+        /// Which monitor: the tag on the game if it has one, otherwise the PRIMARY
+        /// display. Primary is the right default because that is where a game goes
+        /// when nobody has said otherwise — and because Display Helper works by
+        /// switching the primary before launch, so if the user configured the game
+        /// there, the primary already IS their chosen screen.
+        ///
+        /// The game's WINDOW is never touched. That was tried at length and does
+        /// not work for the titles that matter.
+        /// </summary>
+        public override void OnGameStarted(OnGameStartedEventArgs args)
+        {
+            try
+            {
+                var game = args.Game;
+                if (game == null) return;
+
+                // An explicit display:<monitor> tag overrides the primary. Skip
+                // display:manage, which is a modifier rather than a screen name.
+                string named = null;
+                if (game.Tags != null)
+                {
+                    named = game.Tags
+                        .Select(t => t.Name)
+                        .Where(n => n != null && n.StartsWith(TagPrefix, StringComparison.OrdinalIgnoreCase))
+                        .Select(n => n.Substring(TagPrefix.Length))
+                        .FirstOrDefault(n => !n.Equals("manage", StringComparison.OrdinalIgnoreCase)
+                                          && !n.Equals("exclusive", StringComparison.OrdinalIgnoreCase));
+                }
+
+                MonitorHandover.Claim(game.Id, game.Name, named);
+            }
+            catch (Exception ex)
+            {
+                // Never let this break a game launch.
+                Logger.Error(ex, "GlazeWM: failed to claim a monitor.");
+            }
+        }
+
+        /// <summary>The game exited: give the monitor back, exactly as it was.</summary>
+        public override void OnGameStopped(OnGameStoppedEventArgs args)
+        {
+            try
+            {
+                var game = args.Game;
+                if (game == null) return;
+                MonitorHandover.Release(game.Id, game.Name);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "GlazeWM: failed to return the monitor.");
+            }
         }
 
         private static string MonitorsFile =>
