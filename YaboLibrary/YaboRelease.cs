@@ -92,7 +92,9 @@ namespace YaboLibrary
             }
             catch (Exception ex)
             {
-                Logger.Warn(ex, $"Yabo: failed to read/parse release block from '{feedPath}'.");
+                // Redacted: once the feed is an unlisted gist, this path is the
+                // capability, and a parse failure is exactly when it would be logged.
+                Logger.Warn(ex, $"Yabo: failed to read/parse release block from '{Redact.Location(feedPath)}'.");
                 return null;
             }
         }

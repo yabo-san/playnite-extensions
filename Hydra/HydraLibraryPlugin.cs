@@ -43,6 +43,23 @@ namespace HydraPlaynite
         {
             var result = new List<GameMetadata>();
 
+            // This plugin is a bridge to Hydra, not a replacement for it, so the first
+            // question is whether Hydra is here at all. Checked before the helper and
+            // before Node because it is the cheapest test and the likeliest cause, and
+            // because "the library reader failed" is a useless thing to tell someone
+            // who simply does not have Hydra installed.
+            var database = HydraDatabasePath();
+            if (!Directory.Exists(database))
+            {
+                logger.Info($"Hydra: no database at '{database}'; Hydra is not installed. Nothing imported.");
+                PlayniteApi.Notifications.Add(new NotificationMessage(
+                    "hydra-not-installed",
+                    "Hydra: Hydra Launcher is not installed, so there is no library to import. " +
+                    "This plugin reads an existing Hydra install; it does not replace it.",
+                    NotificationType.Info));
+                return result;
+            }
+
             string script = FindHelperScript();
             if (script == null)
             {
@@ -177,6 +194,18 @@ namespace HydraPlaynite
         /// Look beside the extension first so the plugin can ship self-contained, then
         /// fall back to the dotfiles copy. Two locations, no settings screen.
         /// </summary>
+        /// <summary>
+        /// Hydra's LevelDB. Its presence is what "Hydra is installed" means here: the
+        /// exe can be uninstalled while the database survives, and the database is the
+        /// only thing this plugin actually needs.
+        /// </summary>
+        private static string HydraDatabasePath()
+        {
+            return Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                "hydralauncher", "hydra-db");
+        }
+
         private string FindHelperScript()
         {
             var candidates = new[]
@@ -211,7 +240,23 @@ namespace HydraPlaynite
                 WorkingDirectory = Path.GetDirectoryName(scriptPath),
             };
 
-            using (var proc = Process.Start(psi))
+            Process started;
+            try
+            {
+                started = Process.Start(psi);
+            }
+            catch (System.ComponentModel.Win32Exception)
+            {
+                // Process.Start throws before any of the diagnostics below when the
+                // executable is missing entirely, and its own message ("the system
+                // cannot find the file specified") never names what is missing.
+                throw new Exception(
+                    "Node is not installed, or not on PATH. The library reader is a Node " +
+                    "script, because Hydra's LevelDB values are Snappy-compressed. " +
+                    "Install it with: scoop install nodejs");
+            }
+
+            using (var proc = started)
             {
                 string stdout = proc.StandardOutput.ReadToEnd();
                 string stderr = proc.StandardError.ReadToEnd();

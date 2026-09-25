@@ -1,0 +1,72 @@
+name: build
+
+# Every extension here is an independent project that compiles to a single DLL
+# against Playnite's plugin ABI. Nothing is deployed from CI: the artifacts are
+# what a release picks up, and a red build is the only signal that matters.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    # net462 targets the .NET Framework reference assemblies, which only the
+    # Windows images carry. ubuntu-latest cannot build these at all.
+    runs-on: windows-latest
+
+    strategy:
+      # One red plugin should not hide the state of the other five.
+      fail-fast: false
+      matrix:
+        plugin:
+          - Hydra
+          - RohanKar
+          - GithubLauncher
+          - YaboLibrary
+          - YaboDev
+          - GlazeWM
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      # Keyed on the csproj set so a reference bump busts it, not on a lockfile
+      # (these projects do not use one).
+      - name: Cache NuGet
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
+          restore-keys: nuget-${{ runner.os }}-
+
+      - name: Build
+        working-directory: ${{ matrix.plugin }}
+        run: dotnet build -c Release --nologo
+
+      # Warn only, deliberately. Playnite ships Newtonsoft.Json 10.0.3 in its own
+      # install directory and every csproj references it with
+      # ExcludeAssets=runtime, so the plugin compiles against the host's copy and
+      # never carries one. GHSA-5crp-9r3c-p9vr is therefore inherited from
+      # Playnite and cannot be fixed here: bumping the reference would compile
+      # against an API the runtime does not have. Re-check when Playnite itself
+      # upgrades. Any NEW package that appears in this output is a real finding.
+      - name: Vulnerable package report
+        working-directory: ${{ matrix.plugin }}
+        continue-on-error: true
+        run: dotnet list package --vulnerable --include-transitive
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.plugin }}
+          # Everything except the debug symbols. Playnite will not load a DLL
+          # without its extension.yaml, and YaboLibrary also ships an icon.png,
+          # so listing files individually silently drops assets a plugin adds
+          # later. Take the folder and exclude what we do not want instead.
+          path: |
+            ${{ matrix.plugin }}/bin/Release/net462/
+            !${{ matrix.plugin }}/bin/Release/net462/*.pdb
+          if-no-files-found: error

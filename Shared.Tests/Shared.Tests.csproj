@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Targets net8.0, not net462 like the plugins. These tests exercise the shared
+    logic only, which has no Playnite dependency by design, so they run on any
+    machine and on a Linux CI runner. Testing against net462 would buy nothing and
+    would pin the suite to Windows.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <Nullable>disable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <!-- SYSLIB0014: WebRequest is obsolete on net8, but the plugins target net462
+         where it is the correct API and HttpClient's modern shape is unavailable.
+         The production target decides, so the warning is noise only in this suite. -->
+    <NoWarn>$(NoWarn);SYSLIB0014</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <!-- Compiled in rather than project-referenced: the plugins consume these the
+       same way, as shared source, because Playnite resolving one DLL across two
+       extension folders is a fight with no upside. -->
+  <ItemGroup>
+    <!-- Globbed on purpose. Listing files individually is how FeedHealth.cs ended
+         up outside the suite on its first run: a new shared file must not be able
+         to escape the tests just because someone forgot a line here. -->
+    <Compile Include="../Shared/*.cs" />
+  </ItemGroup>
+
+</Project>
