@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Windows.Controls;
 using Newtonsoft.Json;
 using Playnite.SDK;
 using Playnite.SDK.Models;
@@ -34,10 +35,22 @@ namespace HydraPlaynite
         public override string Name => "Hydra";
         public override LibraryClient Client { get; } = new HydraClient();
 
+        public HydraSettingsViewModel SettingsViewModel { get; }
+
+        // The "install Node" notice is worth exactly one showing per Playnite session.
+        // A library refresh runs on every startup and on demand, and a red toast that
+        // repeats itself for a known, unchanged condition trains people to dismiss it.
+        private bool nodeMissingReported;
+
         public HydraLibraryPlugin(IPlayniteAPI api) : base(api)
         {
-            Properties = new LibraryPluginProperties { HasSettings = false };
+            SettingsViewModel = new HydraSettingsViewModel(this);
+            Properties = new LibraryPluginProperties { HasSettings = true };
         }
+
+        public override ISettings GetSettings(bool firstRunSettings) => SettingsViewModel;
+
+        public override UserControl GetSettingsView(bool firstRunSettings) => new HydraSettingsView();
 
         public override IEnumerable<GameMetadata> GetGames(LibraryGetGamesArgs args)
         {
@@ -74,16 +87,37 @@ namespace HydraPlaynite
                 return result;
             }
 
+            // Node, before the helper runs: this is the failure that hid behind
+            // "the system cannot find the file specified" for a month. Resolve it in
+            // the places people actually have it, and if none of them has it, say
+            // once what to install and where the reader expects to run.
+            string node = FindNode(SettingsViewModel?.Settings?.NodePath);
+            if (node == null)
+            {
+                if (!nodeMissingReported)
+                {
+                    nodeMissingReported = true;
+                    logger.Warn("Hydra: node.exe not found on PATH or in the usual install folders; nothing imported.");
+                    PlayniteApi.Notifications.Add(new NotificationMessage(
+                        "hydra-no-node",
+                        "Hydra: Node is not installed, so the library reader (" + script + ") cannot run. " +
+                        "Install it with `scoop install nodejs` or from nodejs.org, or set the path to node.exe " +
+                        "in the Hydra plugin settings, then refresh the library.",
+                        NotificationType.Error));
+                }
+                return result;
+            }
+
             HydraDump dump;
             try
             {
-                dump = RunHelper(script);
+                dump = RunHelper(node, script);
             }
             catch (Exception ex)
             {
                 logger.Error(ex, "Hydra: helper failed.");
                 PlayniteApi.Notifications.Add(new NotificationMessage(
-                    "hydra-helper-failed", "Hydra: could not read the library — " + ex.Message,
+                    "hydra-helper-failed", "Hydra: could not read the library: " + ex.Message,
                     NotificationType.Error));
                 return result;
             }
@@ -104,7 +138,7 @@ namespace HydraPlaynite
                 }
 
                 // A Hydra entry is only INSTALLED if it carries an executablePath, and
-                // most do not — Hydra keeps catalogue entries for games you have merely
+                // most do not: Hydra keeps catalogue entries for games you have merely
                 // looked at. Importing those as installed would put dead Play buttons
                 // all over the library, so installed-ness is derived from the path
                 // actually existing on disk.
@@ -162,7 +196,7 @@ namespace HydraPlaynite
                     meta.CoverImage = new MetadataFile(g.CoverUrl);
                 }
 
-                // The shop a game came from is worth keeping — a Hydra "steam" entry and
+                // The shop a game came from is worth keeping: a Hydra "steam" entry and
                 // a real Steam-library entry are the same game, and the tag makes the
                 // overlap visible instead of looking like a duplicate import.
                 if (!string.IsNullOrWhiteSpace(g.Shop))
@@ -182,7 +216,7 @@ namespace HydraPlaynite
                 // launched looks broken unless you know Hydra keeps catalogue entries.
                 PlayniteApi.Notifications.Add(new NotificationMessage(
                     "hydra-none-installed",
-                    $"Hydra: imported {result.Count} games, none installed — these are " +
+                    $"Hydra: imported {result.Count} games, none installed. These are " +
                     "catalogue entries. Install one in Hydra and refresh to get a Play action.",
                     NotificationType.Info));
             }
@@ -219,17 +253,49 @@ namespace HydraPlaynite
             return candidates.FirstOrDefault(File.Exists);
         }
 
-        private HydraDump RunHelper(string scriptPath)
+        /// <summary>
+        /// Node, in the order people have it: the configured path, PATH, the
+        /// nodejs.org installer's two folders, then scoop (the shim first, then the
+        /// versioned app folder in case shims are off PATH). Returns null when none of
+        /// them has a node.exe, and the caller decides what to say about that.
+        /// </summary>
+        internal static string FindNode(string configured)
+        {
+            if (!string.IsNullOrWhiteSpace(configured))
+            {
+                return File.Exists(configured) ? configured : null;
+            }
+
+            var candidates = new List<string>();
+            var path = Environment.GetEnvironmentVariable("PATH") ?? string.Empty;
+            foreach (var dir in path.Split(';').Where(p => !string.IsNullOrWhiteSpace(p)))
+            {
+                try { candidates.Add(Path.Combine(dir.Trim(), "node.exe")); } catch { }
+            }
+
+            var programFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+            var local = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var profile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            candidates.Add(Path.Combine(programFiles, "nodejs", "node.exe"));
+            candidates.Add(Path.Combine(local, "Programs", "nodejs", "node.exe"));
+            candidates.Add(Path.Combine(profile, "scoop", "shims", "node.exe"));
+            candidates.Add(Path.Combine(profile, "scoop", "apps", "nodejs", "current", "node.exe"));
+            candidates.Add(Path.Combine(profile, "scoop", "apps", "nodejs-lts", "current", "node.exe"));
+
+            return candidates.FirstOrDefault(File.Exists);
+        }
+
+        private HydraDump RunHelper(string nodeExe, string scriptPath)
         {
             if (IsHydraRunning())
             {
-                throw new Exception("Hydra is running — close it and refresh again " +
+                throw new Exception("Hydra is running. Close it and refresh again " +
                                     "(its database takes an exclusive lock).");
             }
 
             var psi = new ProcessStartInfo
             {
-                FileName = "node",
+                FileName = nodeExe,
                 Arguments = "\"" + scriptPath + "\"",
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
@@ -245,15 +311,12 @@ namespace HydraPlaynite
             {
                 started = Process.Start(psi);
             }
-            catch (System.ComponentModel.Win32Exception)
+            catch (System.ComponentModel.Win32Exception ex)
             {
-                // Process.Start throws before any of the diagnostics below when the
-                // executable is missing entirely, and its own message ("the system
-                // cannot find the file specified") never names what is missing.
-                throw new Exception(
-                    "Node is not installed, or not on PATH. The library reader is a Node " +
-                    "script, because Hydra's LevelDB values are Snappy-compressed. " +
-                    "Install it with: scoop install nodejs");
+                // FindNode already proved the file exists, so this is a permissions or
+                // policy failure on it, not a missing install. Name the path so the
+                // message is about the right thing.
+                throw new Exception("could not start " + nodeExe + ": " + ex.Message);
             }
 
             using (var proc = started)
@@ -270,11 +333,11 @@ namespace HydraPlaynite
                 if (string.IsNullOrWhiteSpace(stdout))
                 {
                     throw new Exception(string.IsNullOrWhiteSpace(stderr)
-                        ? "the library reader returned nothing (is Node installed and on PATH?)"
+                        ? "the library reader returned nothing (is `classic-level` installed beside " + scriptPath + "?)"
                         : stderr.Trim());
                 }
 
-                // The helper always emits parseable JSON — {"games":[...]} or {"error":"..."} —
+                // The helper always emits parseable JSON, {"games":[...]} or {"error":"..."},
                 // so a nonzero exit still carries a usable message rather than a stack trace.
                 return JsonConvert.DeserializeObject<HydraDump>(stdout);
             }

@@ -1,0 +1,24 @@
+<UserControl x:Class="QuiverPlaynite.QuiverSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             d1p1:Ignorable="d"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006">
+    <!-- DataContext is the QuiverSettingsViewModel; bindings target its .Settings. -->
+    <StackPanel Margin="20">
+        <TextBlock Text="Quiver Launcher"
+                   FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+
+        <TextBlock Text="Quiver data folder (optional)" Margin="0,0,0,4"/>
+        <TextBox Text="{Binding Settings.QuiverRoot, UpdateSourceTrigger=PropertyChanged}"
+                 Margin="0,0,0,4"/>
+        <TextBlock TextWrapping="Wrap" Opacity="0.7" Margin="0,0,0,12"
+                   Text="Leave blank to auto-detect the Velopack install (%LOCALAPPDATA%\QuiverLauncher). Set it for a portable Quiver, to the folder that holds apps.json and Apps\."/>
+
+        <CheckBox Content="Play through Quiver (auto-update before launch)"
+                  IsChecked="{Binding Settings.LaunchThroughQuiver}"
+                  Margin="0,0,0,4"/>
+        <TextBlock TextWrapping="Wrap" Opacity="0.7"
+                   Text="Off: Play runs the app's executable directly. On: Play runs 'QuiverLauncher --run', which pulls a newer release first if there is one."/>
+    </StackPanel>
+</UserControl>

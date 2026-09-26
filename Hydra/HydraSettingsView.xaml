@@ -1,0 +1,17 @@
+<UserControl x:Class="HydraPlaynite.HydraSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             d1p1:Ignorable="d"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006">
+    <!-- DataContext is the HydraSettingsViewModel; bindings target its .Settings. -->
+    <StackPanel Margin="20">
+        <TextBlock Text="Hydra" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+
+        <TextBlock Text="Path to node.exe (optional)" Margin="0,0,0,4"/>
+        <TextBox Text="{Binding Settings.NodePath, UpdateSourceTrigger=PropertyChanged}"
+                 Margin="0,0,0,4"/>
+        <TextBlock TextWrapping="Wrap" Opacity="0.7"
+                   Text="The library reader is a Node script (Hydra's database is LevelDB with Snappy-compressed values). Leave blank to find Node on PATH, in the nodejs.org install folders, or in the scoop shim. Set it only if Node lives somewhere unusual."/>
+    </StackPanel>
+</UserControl>

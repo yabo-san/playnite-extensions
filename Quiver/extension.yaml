@@ -1,0 +1,19 @@
+Id: Quiver_9d2f4e7a-3b61-4c58-8e0f-6a1d5c7b2e93
+Name: Quiver
+Author: kevin
+Version: 0.1.0
+Module: QuiverPlaynite.dll
+Type: GameLibrary
+Description: >
+  Imports Quiver Launcher's library into Playnite.
+
+  Quiver keeps its app list in apps.json and marks each installed app with a
+  version.txt in its folder, so this plugin reads those files directly: one card
+  per app, installed when Quiver says so, Play runs the executable Quiver
+  selected. Install and Uninstall hand off to Quiver's own command line
+  (--download / --uninstall), because fetching releases from GitHub and GitLab
+  is Quiver's job, not ours.
+
+  Requires Quiver Launcher. The data root is found automatically for the
+  Velopack install (%LOCALAPPDATA%\QuiverLauncher); portable builds can point
+  the plugin at their folder in settings.

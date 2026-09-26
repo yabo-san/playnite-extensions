@@ -23,6 +23,7 @@ jobs:
           - Hydra
           - RohanKar
           - GithubLauncher
+          - Quiver
           - YaboLibrary
           - YaboDev
           - GlazeWM

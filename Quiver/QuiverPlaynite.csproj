@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Quiver for Playnite: a LibraryPlugin that imports Quiver Launcher's library.
+
+    Quiver (tgeorgiadis/quiver-launcher) is a C#/Avalonia fork of SirDiabo's
+    GithubLauncher that installs console recompilations and ports from GitHub and
+    GitLab releases. It keeps its state on disk in plain files (apps.json, then
+    version.txt / selected_executable.txt per app folder), so this plugin reads
+    those directly and only shells out to the Quiver exe for the things Quiver
+    owns: the download, uninstall, and (optionally) run verbs, the last for its
+    auto-update.
+
+    Build: dotnet build -c Release  ->  bin\Release\net462\QuiverPlaynite.dll
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net462</TargetFramework>
+    <!-- IPlayniteAPI.Dialogs and the settings view are WPF, so the reference
+         assemblies are needed to compile. Playnite supplies WPF at runtime. -->
+    <UseWPF>true</UseWPF>
+    <AssemblyName>QuiverPlaynite</AssemblyName>
+    <RootNamespace>QuiverPlaynite</RootNamespace>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Reference-only: Playnite supplies both at runtime, so neither is copied out. -->
+    <PackageReference Include="PlayniteSDK" Version="6.16.0">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="extension.yaml" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>
