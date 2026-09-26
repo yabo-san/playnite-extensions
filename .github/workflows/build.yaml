@@ -24,8 +24,7 @@ jobs:
           - RohanKar
           - GithubLauncher
           - YaboLibrary
-          - YaboDev
-          - GlazeWM
+          - Drop
 
     steps:
       - uses: actions/checkout@v4
