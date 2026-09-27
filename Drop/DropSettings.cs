@@ -114,6 +114,12 @@ namespace DropPlaynite
 
         public bool VerifySettings(out List<string> errors)
         {
+            // Pasted values often carry a stray space; a path with one never exists,
+            // the check fails and Playnite discards every change in the dialog.
+            Settings.BaseUrl = Settings.BaseUrl?.Trim();
+            Settings.InstallRoot = Settings.InstallRoot?.Trim();
+            Settings.LibrarySharePath = Settings.LibrarySharePath?.Trim();
+            Settings.AdminToken = Settings.AdminToken?.Trim();
             errors = new List<string>();
             if (string.IsNullOrWhiteSpace(Settings.BaseUrl))
             {
