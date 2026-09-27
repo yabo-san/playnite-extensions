@@ -42,6 +42,22 @@ namespace DropPlaynite
             vm.RefreshStatus();
         }
 
+        private void BrowseInstallRoot_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = Model;
+            if (vm?.Settings == null) return;
+            var picked = vm.Plugin.PlayniteApi.Dialogs.SelectFolder();
+            if (!string.IsNullOrEmpty(picked)) vm.Settings.InstallRoot = picked;
+        }
+
+        private void BrowseLibraryShare_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = Model;
+            if (vm?.Settings == null) return;
+            var picked = vm.Plugin.PlayniteApi.Dialogs.SelectFolder();
+            if (!string.IsNullOrEmpty(picked)) vm.Settings.LibrarySharePath = picked;
+        }
+
         private void AdminToken_Changed(object sender, RoutedEventArgs e)
         {
             var vm = Model;

@@ -20,7 +20,10 @@
                    Text="Sign in shows a short code. Enter it in Drop's web UI under Settings, Clients, and this Playnite becomes a Drop client. The credential is stored in this plugin's settings, the same way the Drop desktop app stores its own."/>
 
         <TextBlock Text="Install games to" Margin="0,0,0,4"/>
-        <TextBox Text="{Binding Settings.InstallRoot, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,4"/>
+        <DockPanel Margin="0,0,0,4">
+            <Button Content="Browse..." Click="BrowseInstallRoot_Click" DockPanel.Dock="Right" Padding="10,2" Margin="8,0,0,0"/>
+            <TextBox Text="{Binding Settings.InstallRoot, UpdateSourceTrigger=PropertyChanged}"/>
+        </DockPanel>
         <TextBlock TextWrapping="Wrap" Opacity="0.7" Margin="0,0,0,16"
                    Text="Leave blank for %LOCALAPPDATA%\Playnite\Drop. Each game gets its own folder underneath."/>
 
@@ -30,7 +33,10 @@
         <PasswordBox x:Name="AdminTokenBox" PasswordChanged="AdminToken_Changed" Margin="0,0,0,12"/>
 
         <TextBlock Text="Drop library folder, as seen from this machine (a share works)" Margin="0,0,0,4"/>
-        <TextBox Text="{Binding Settings.LibrarySharePath, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,12"/>
+        <DockPanel Margin="0,0,0,12">
+            <Button Content="Browse..." Click="BrowseLibraryShare_Click" DockPanel.Dock="Right" Padding="10,2" Margin="8,0,0,0"/>
+            <TextBox Text="{Binding Settings.LibrarySharePath, UpdateSourceTrigger=PropertyChanged}"/>
+        </DockPanel>
 
         <TextBlock Text="Library id (optional, otherwise found from Drop's unimported list)" Margin="0,0,0,4"/>
         <TextBox Text="{Binding Settings.LibraryId, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,12"/>
