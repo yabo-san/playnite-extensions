@@ -39,6 +39,10 @@ namespace QuiverPlaynite
 
         public override Guid Id { get; } = Guid.Parse("9d2f4e7a-3b61-4c58-8e0f-6a1d5c7b2e93");
         public override string Name => "Quiver";
+
+        // Shown in Playnite's library filter and on each game's source.
+        public override string LibraryIcon => System.IO.Path.Combine(
+            System.IO.Path.GetDirectoryName(typeof(QuiverLibraryPlugin).Assembly.Location), "icon.png");
         public override LibraryClient Client { get; } = new QuiverClient();
 
         public QuiverSettingsViewModel SettingsViewModel { get; }

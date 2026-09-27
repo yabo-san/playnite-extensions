@@ -17,3 +17,4 @@ Description: >
   Requires Quiver Launcher. The data root is found automatically for the
   Velopack install (%LOCALAPPDATA%\QuiverLauncher); portable builds can point
   the plugin at their folder in settings.
+Icon: icon.png
