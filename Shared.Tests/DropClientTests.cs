@@ -38,6 +38,18 @@ namespace Shared.Tests
         }
 
         [Fact]
+        public void BeginAuth_reads_an_unquoted_plain_text_code()
+        {
+            // Live drop.example.com, 2026-09-27: 200 text/html with the bare code, no
+            // quotes. A code starting with a digit made JToken.Parse throw
+            // "Input string '9C86E0F' is not a valid number".
+            var start = Client(_ => "9C86E0F\n").BeginAuth("Playnite", "Windows");
+
+            Assert.Equal("9C86E0F", start.Code);
+            Assert.True(start.UsesCode);
+        }
+
+        [Fact]
         public void BeginAuth_still_reads_the_older_object_shape()
         {
             var start = Client(_ => "{\"code\":\"ABCD12\",\"id\":\"client-1\"}").BeginAuth("Playnite", "Windows");

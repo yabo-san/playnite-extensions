@@ -59,7 +59,15 @@ namespace Yabo.Shared
                 mode = "code",
             });
 
-            var token = string.IsNullOrWhiteSpace(body) ? JValue.CreateNull() : JToken.Parse(body);
+            // Current Drop servers answer with the bare code as plain text (e.g. 1AE16AF,
+            // served as text/html); older ones returned a JSON string or object.
+            // JToken.Parse on the bare code throws, so only parse what looks like JSON.
+            var trimmed = (body ?? string.Empty).Trim();
+            if (trimmed.Length > 0 && trimmed[0] != '{' && trimmed[0] != '"' && trimmed[0] != '[')
+            {
+                return new DropAuthStart { Code = trimmed };
+            }
+            var token = trimmed.Length == 0 ? JValue.CreateNull() : JToken.Parse(trimmed);
             if (token.Type == JTokenType.String)
             {
                 return new DropAuthStart { Code = (string)token };
