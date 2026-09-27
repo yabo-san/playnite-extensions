@@ -41,6 +41,10 @@ namespace DropPlaynite
         /// <summary>Optional. A system-mode API token with the import ACLs; enables "Send to Drop".</summary>
         public string AdminToken { get => adminToken; set => SetValue(ref adminToken, value); }
 
+        private string authScheme = string.Empty;
+        /// <summary>"Nonce" (Drop 0.3.x, default) or "JWT" (newer Drop); learned automatically.</summary>
+        public string AuthScheme { get => authScheme; set => SetValue(ref authScheme, value); }
+
         /// <summary>Optional. The Drop library root as this machine sees it, e.g. a UNC share.</summary>
         public string LibrarySharePath { get => librarySharePath; set => SetValue(ref librarySharePath, value); }
 

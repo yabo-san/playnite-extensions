@@ -32,7 +32,12 @@ namespace DropPlaynite
             {
                 return null;
             }
-            return "JWT " + settings.ClientId + " " + MintJwt(settings.PrivateKeyPem);
+            // Released Drop (0.3.x) authenticates clients with "Nonce <id> <ms> <sig>";
+            // newer builds switched to "JWT <id> <jwt>". Nonce is the default; the
+            // plugin flips to JWT when a server rejects it (see DropLibraryPlugin.Api).
+            return string.Equals(settings.AuthScheme, "JWT", StringComparison.OrdinalIgnoreCase)
+                ? "JWT " + settings.ClientId + " " + MintJwt(settings.PrivateKeyPem)
+                : "Nonce " + settings.ClientId + " " + MintNonce(settings.PrivateKeyPem);
         }
 
         /// <summary>Header value for an admin call, or null when no token is configured.</summary>
@@ -61,6 +66,25 @@ namespace DropPlaynite
             var signature = signer.GenerateSignature();
 
             return header + "." + claims + "." + Base64Url(signature);
+        }
+
+        /// <summary>
+        /// Drop 0.3.x nonce: the current time in milliseconds, signed ECDSA P-384 over
+        /// SHA-384 as raw r||s, hex-encoded (droplet-rs ssl.rs sign_nonce). The server
+        /// accepts it within 30 seconds either side.
+        /// </summary>
+        internal static string MintNonce(string privateKeyPem, long? nowMs = null)
+        {
+            var key = LoadEcPrivateKey(privateKeyPem);
+            var nonce = (nowMs ?? DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()).ToString(System.Globalization.CultureInfo.InvariantCulture);
+            var input = Encoding.UTF8.GetBytes(nonce);
+            var signer = SignerUtilities.GetSigner("SHA-384withPLAIN-ECDSA");
+            signer.Init(true, key);
+            signer.BlockUpdate(input, 0, input.Length);
+            var sig = signer.GenerateSignature();
+            var hex = new StringBuilder(sig.Length * 2);
+            foreach (var b in sig) hex.Append(b.ToString("x2"));
+            return nonce + " " + hex;
         }
 
         private static ECPrivateKeyParameters LoadEcPrivateKey(string pem)

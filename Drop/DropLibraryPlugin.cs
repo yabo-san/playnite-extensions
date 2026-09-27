@@ -58,8 +58,36 @@ namespace DropPlaynite
             var baseUrl = Settings.BaseUrl?.Trim();
             return new DropClient(
                 baseUrl,
-                (path, auth) => DropHttp.Get(baseUrl, path, auth),
-                (path, auth, body) => DropHttp.Post(baseUrl, path, auth, body));
+                (path, auth) => WithSchemeFallback(auth, a => DropHttp.Get(baseUrl, path, a)),
+                (path, auth, body) => WithSchemeFallback(auth, a => DropHttp.Post(baseUrl, path, a, body)));
+        }
+
+        /// <summary>
+        /// Client calls only: on a 403, retry once with the other signing scheme
+        /// (Nonce for Drop 0.3.x, JWT for newer servers) and keep whichever worked.
+        /// </summary>
+        private string WithSchemeFallback(string auth, Func<string, string> call)
+        {
+            try { return call(auth); }
+            catch (System.Net.WebException ex) when (
+                (ex.Response as System.Net.HttpWebResponse)?.StatusCode == System.Net.HttpStatusCode.Forbidden
+                && auth != null && (auth.StartsWith("Nonce ") || auth.StartsWith("JWT ")))
+            {
+                var previous = Settings.AuthScheme;
+                Settings.AuthScheme = auth.StartsWith("JWT ") ? "Nonce" : "JWT";
+                try
+                {
+                    var result = call(DropAuth.ClientHeader(Settings));
+                    SavePluginSettings(Settings);
+                    logger.Info("Drop: server accepts " + Settings.AuthScheme + " client auth; remembered.");
+                    return result;
+                }
+                catch
+                {
+                    Settings.AuthScheme = previous;
+                    throw;
+                }
+            }
         }
 
         /// <summary>A fresh client header, or null when not signed in. Ten-second JWTs, so never cache it.</summary>
