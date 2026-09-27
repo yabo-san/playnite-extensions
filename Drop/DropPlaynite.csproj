@@ -46,6 +46,7 @@
     <!-- Shared source, compiled in (see Shared.Tests.csproj for why not a DLL). -->
     <Compile Include="../Shared/*.cs" />
     <None Update="extension.yaml" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="icon.png" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

@@ -24,3 +24,4 @@ Description: >
 
   Folders with nothing launchable - empty, or holding only installers - are
   imported as NOT installed rather than given a dead Play button.
+Icon: icon.png

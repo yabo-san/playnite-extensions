@@ -30,6 +30,10 @@ namespace DropPlaynite
 
         public override Guid Id { get; } = Guid.Parse("5b8e1c2a-7d43-4f06-9a1e-3c2b6d8f0e47");
         public override string Name => "Drop";
+
+        // Shown in Playnite's library filter and on each game's source.
+        public override string LibraryIcon => System.IO.Path.Combine(
+            System.IO.Path.GetDirectoryName(typeof(DropLibraryPlugin).Assembly.Location), "icon.png");
         public override LibraryClient Client { get; } = new DropDesktopClient();
 
         public DropSettingsViewModel SettingsViewModel { get; }

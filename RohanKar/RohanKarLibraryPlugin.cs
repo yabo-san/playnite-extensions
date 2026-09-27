@@ -40,6 +40,10 @@ namespace RohanKarPlaynite
 
         public override Guid Id { get; } = Guid.Parse("ecc7bf2f-5416-49d4-88c6-648397ed2668");
         public override string Name => "RohanKar";
+
+        // Shown in Playnite's library filter and on each game's source.
+        public override string LibraryIcon => System.IO.Path.Combine(
+            System.IO.Path.GetDirectoryName(typeof(RohanKarLibraryPlugin).Assembly.Location), "icon.png");
         public override LibraryClient Client { get; } = new RohanKarClient();
 
         public RohanKarLibraryPlugin(IPlayniteAPI api) : base(api)
