@@ -20,20 +20,17 @@ the Playnite SDK, and are independent of each other.
 
 | | reads | state |
 |---|---|---|
-| **RohanKar** | the install folder | works — 19 games |
+| **RohanKar** | the y4bo launcher's `playnite-export.json` | reads the export; see its README |
 | **Hydra** | its LevelDB, via a Node helper | works — 5 entries |
 | **GithubLauncher** | its own CLI (`--list` / `--run`) | 0.9 — see below |
 | **YaboLibrary** | the yabo gate/staging engine | from the launcher era |
 
-**RohanKar** deliberately does not read `library.db`. On a real install every
-table in it is empty while the games sit on disk — it only records what RohanKar
-itself installed. So the folder is the source of truth. Picking *which* `.exe` is
-the game is the actual work: repack folders hold up to a dozen, and the game is
-often not the biggest (PhysX outweighs `Blur.exe`; a Games For Windows Live
-installer outweighs Lost Planet 2). `ExePicker` scores candidates on title match,
-folder depth and known-runtime patterns, with size only breaking ties. Every
-runner-up is attached as a secondary action, so a wrong guess is one right-click
-to fix.
+**RohanKar** reads the `playnite-export.json` the launcher rewrites on every
+library change, and watches it. It used to scan the install folder and guess
+each game's exe, because `library.db` was empty on a real install; the launcher
+now exports the exe it picked, so the guessing is gone. Install, uninstall and
+"open in launcher" run through the launcher's own CLI. Details in
+`RohanKar/README.md`.
 
 **Hydra** delegates the read to Node because its LevelDB values are
 Snappy-compressed and there is no .NET reader worth vendoring; the helper uses
