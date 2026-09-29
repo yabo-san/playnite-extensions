@@ -23,6 +23,7 @@ the Playnite SDK, and are independent of each other.
 | **RohanKar** | the install folder | works — 19 games |
 | **Hydra** | its LevelDB, via a Node helper | works — 5 entries |
 | **GithubLauncher** | its own CLI (`--list` / `--run`) | 0.9 — see below |
+| **YaboLauncherLibrary** | the y4bo launcher's `playnite-export.json` | replaces YaboLibrary |
 | **YaboLibrary** | the yabo gate/staging engine | from the launcher era |
 
 **RohanKar** deliberately does not read `library.db`. On a real install every
