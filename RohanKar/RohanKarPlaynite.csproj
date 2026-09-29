@@ -1,19 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <!--
-    RohanKar for Playnite — a LibraryPlugin that imports RohanKar's installed games.
-
-    Scans the install folder rather than reading library.db: on a real install that
-    database is empty while the games are all on disk, so the folder is the only
-    source of truth. Which .exe is the game is decided by ExePicker, tuned against
-    a real 19-game library.
+    RohanKar for Playnite: a LibraryPlugin that imports the y4bo launcher's library
+    from its playnite-export.json and drives the launcher through its CLI.
 
     Build: dotnet build -c Release  ->  bin\Release\net462\RohanKarPlaynite.dll
+    Pack:  bash pack.sh             ->  bin\RohanKar_<version>.pext (CI does this on a release)
   -->
 
   <PropertyGroup>
     <TargetFramework>net462</TargetFramework>
-    <UseWPF>true</UseWPF>
     <AssemblyName>RohanKarPlaynite</AssemblyName>
     <RootNamespace>RohanKarPlaynite</RootNamespace>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
@@ -30,6 +26,20 @@
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3">
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- WPF by plain reference, not UseWPF: the settings view is built in code, so there
+         is no XAML to compile and the project builds on any OS (the tests run on Linux). -->
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The export model is shared source, parsed the same way in the tests. -->
+    <Compile Include="../Shared/LauncherExport.cs" Link="Shared/LauncherExport.cs" />
   </ItemGroup>
 
   <ItemGroup>
