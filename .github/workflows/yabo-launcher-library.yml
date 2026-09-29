@@ -1,0 +1,67 @@
+name: YaboLauncherLibrary
+
+# PR checks for the y4bo Launcher plugin: unit tests and a build that packs the
+# .pext. Both run on Linux: the plugin references WPF by assembly, not UseWPF,
+# and the tests are net8.0. The Windows matrix in build.yaml builds it too.
+on:
+  pull_request:
+    paths:
+      - 'YaboLauncherLibrary/**'
+      - 'YaboLauncherLibrary.Tests/**'
+      - 'Shared/LauncherExport.cs'
+      - '.github/workflows/yabo-launcher-library.yml'
+      - '.github/workflows/yabo-launcher-library-release.yml'
+      - 'release-please-config.json'
+      - '.release-please-manifest.json'
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Cache NuGet
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
+          restore-keys: nuget-${{ runner.os }}-
+
+      # The export fixture stands in for the launcher; nothing here reaches the network
+      - name: Tests
+        run: dotnet test YaboLauncherLibrary.Tests --nologo
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Cache NuGet
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
+          restore-keys: nuget-${{ runner.os }}-
+
+      - name: Build
+        run: dotnet build YaboLauncherLibrary -c Release --nologo
+
+      - name: Pack .pext
+        run: bash YaboLauncherLibrary/pack.sh
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: YaboLauncherLibrary-pext
+          path: YaboLauncherLibrary/bin/*.pext
+          if-no-files-found: error

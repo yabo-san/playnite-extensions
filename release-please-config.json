@@ -1,0 +1,17 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "separate-pull-requests": true,
+  "packages": {
+    "YaboLauncherLibrary": {
+      "release-type": "simple",
+      "package-name": "yabo-launcher-library",
+      "component": "yabo-launcher-library",
+      "include-component-in-tag": true,
+      "bump-minor-pre-major": true,
+      "changelog-path": "CHANGELOG.md",
+      "extra-files": [
+        { "type": "generic", "path": "extension.yaml" }
+      ]
+    }
+  }
+}

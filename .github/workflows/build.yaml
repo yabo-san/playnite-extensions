@@ -24,6 +24,7 @@ jobs:
           - RohanKar
           - GithubLauncher
           - YaboLibrary
+          - YaboLauncherLibrary
           - YaboDev
           - GlazeWM
 
