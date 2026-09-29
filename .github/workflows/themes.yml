@@ -1,0 +1,53 @@
+name: Themes
+
+# PR check for the two Mythos themes: the manifest parses, the XAML is well
+# formed, and the .pthm packs. The package is uploaded as an artifact so it can
+# be dropped into Playnite for a look before merging.
+on:
+  pull_request:
+    paths:
+      - 'YaboTheme/**'
+      - 'MythosFast/**'
+      - 'scripts/pack-theme.sh'
+      - '.github/workflows/themes.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  pack:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        theme: [YaboTheme, MythosFast]
+    steps:
+      - uses: actions/checkout@v4
+      - name: theme.yaml parses and carries Id, Name, Version
+        run: |
+          python3 - "${{ matrix.theme }}/theme.yaml" <<'EOF'
+          import sys, yaml
+          d = yaml.safe_load(open(sys.argv[1], encoding="utf-8"))
+          for k in ("Id", "Name", "Version", "ThemeApiVersion"):
+              assert d.get(k), f"theme.yaml missing {k}"
+          print(d["Id"], d["Version"])
+          EOF
+      - name: XAML is well formed
+        run: |
+          python3 - "${{ matrix.theme }}" <<'EOF'
+          import sys, pathlib, xml.etree.ElementTree as ET
+          bad = 0
+          for p in pathlib.Path(sys.argv[1]).rglob("*.xaml"):
+              try:
+                  ET.parse(p)
+              except ET.ParseError as e:
+                  bad += 1; print(f"{p}: {e}")
+          sys.exit(1 if bad else 0)
+          EOF
+      - name: Pack .pthm
+        run: bash scripts/pack-theme.sh "${{ matrix.theme }}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.theme }}-pthm
+          path: ${{ matrix.theme }}/bin/*.pthm
+          if-no-files-found: error

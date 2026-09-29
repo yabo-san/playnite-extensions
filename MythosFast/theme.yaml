@@ -2,7 +2,7 @@ ThemeApiVersion: 2.9.0
 Id: MythosFast_8e3b1c20-4a7d-4f91-b2c6-1d9e5a83f047
 Name: Mythos (Fast)
 Author: bansakai
-Version: 2.0
+Version: 2.0.0 # x-release-please-version
 Links:
 - Name: GitHub
   Url: https://github.com/bansakai/Mythos

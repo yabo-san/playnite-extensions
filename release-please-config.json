@@ -12,6 +12,26 @@
       "extra-files": [
         { "type": "generic", "path": "extension.yaml" }
       ]
+    },
+    "YaboTheme": {
+      "release-type": "simple",
+      "package-name": "mythos-cider",
+      "component": "mythos-cider",
+      "include-component-in-tag": true,
+      "changelog-path": "CHANGELOG.md",
+      "extra-files": [
+        { "type": "generic", "path": "theme.yaml" }
+      ]
+    },
+    "MythosFast": {
+      "release-type": "simple",
+      "package-name": "mythos-fast",
+      "component": "mythos-fast",
+      "include-component-in-tag": true,
+      "changelog-path": "CHANGELOG.md",
+      "extra-files": [
+        { "type": "generic", "path": "theme.yaml" }
+      ]
     }
   }
 }

@@ -1,0 +1,84 @@
+name: Release
+
+# One release-please run for every shipped component (RohanKar plugin, the two
+# Mythos themes). Merging a component's release PR tags it; the matching job
+# below builds its package and attaches it to that release.
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    outputs:
+      rohankar_created: ${{ steps.release.outputs['RohanKar--release_created'] }}
+      rohankar_tag: ${{ steps.release.outputs['RohanKar--tag_name'] }}
+      yabotheme_created: ${{ steps.release.outputs['YaboTheme--release_created'] }}
+      yabotheme_tag: ${{ steps.release.outputs['YaboTheme--tag_name'] }}
+      mythosfast_created: ${{ steps.release.outputs['MythosFast--release_created'] }}
+      mythosfast_tag: ${{ steps.release.outputs['MythosFast--tag_name'] }}
+    steps:
+      - name: Run release-please
+        id: release
+        uses: googleapis/release-please-action@v4
+        with:
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN || secrets.GITHUB_TOKEN }}
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+
+  rohankar-pext:
+    needs: release-please
+    if: needs.release-please.outputs.rohankar_created == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.release-please.outputs.rohankar_tag }}
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Tests
+        run: dotnet test RohanKar.Tests --nologo
+      - name: Build
+        run: dotnet build RohanKar -c Release --nologo
+      - name: Pack .pext
+        run: bash RohanKar/pack.sh
+      - name: Attach .pext to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${{ needs.release-please.outputs.rohankar_tag }}" RohanKar/bin/*.pext --clobber
+
+  mythos-cider-pthm:
+    needs: release-please
+    if: needs.release-please.outputs.yabotheme_created == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.release-please.outputs.yabotheme_tag }}
+      - name: Pack .pthm
+        run: bash scripts/pack-theme.sh YaboTheme
+      - name: Attach .pthm to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${{ needs.release-please.outputs.yabotheme_tag }}" YaboTheme/bin/*.pthm --clobber
+
+  mythos-fast-pthm:
+    needs: release-please
+    if: needs.release-please.outputs.mythosfast_created == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.release-please.outputs.mythosfast_tag }}
+      - name: Pack .pthm
+        run: bash scripts/pack-theme.sh MythosFast
+      - name: Attach .pthm to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${{ needs.release-please.outputs.mythosfast_tag }}" MythosFast/bin/*.pthm --clobber

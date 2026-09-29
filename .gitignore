@@ -13,6 +13,7 @@ packages/
 
 # Playnite packs extensions as .pext for distribution; built artefacts, not source.
 *.pext
+*.pthm
 
 # ── Personal, never committed ────────────────────────────────────────────────
 # Carried over from the repo these extensions came out of. Neither has ever been

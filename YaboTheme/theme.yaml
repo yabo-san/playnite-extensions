@@ -2,7 +2,7 @@ ThemeApiVersion: 2.9.0
 Id: YaboTheme_1fd5a09c-7ccc-4691-81a6-6d04aad8a161
 Name: "Mythos Cider"
 Author: "Yabo — a more responsive fork of Mythos"
-Version: 2.0
+Version: 2.0.0 # x-release-please-version
 Links:
 - Name: GitHub
   Url: https://github.com/bansakai/Mythos
