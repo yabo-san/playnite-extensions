@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Tests for YaboLauncherLibrary: the export parser, GameId matching and the
+    GameMetadata mapping. net8.0 like Shared.Tests, so they run on Linux; the
+    Playnite SDK is referenced for its model types only, no Playnite runtime.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <Nullable>disable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <!-- NU1701: PlayniteSDK is a net462 package; its model types load fine on net8. -->
+    <NoWarn>$(NoWarn);NU1701</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="PlayniteSDK" Version="6.16.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The plugin's Playnite-free parts, compiled in as the plugin compiles them. -->
+    <Compile Include="../Shared/LauncherExport.cs" />
+    <Compile Include="../YaboLauncherLibrary/GameIdResolver.cs" />
+    <Compile Include="../YaboLauncherLibrary/GameMapper.cs" />
+    <Compile Include="../YaboLauncherLibrary/LauncherCli.cs" />
+    <None Include="fixtures/**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>
