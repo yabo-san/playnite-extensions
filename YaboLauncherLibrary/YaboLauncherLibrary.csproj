@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    y4bo Launcher for Playnite: a LibraryPlugin that reads the launcher's
+    playnite-export.json and drives it through its CLI.
+
+    Build: dotnet build -c Release  ->  bin\Release\net462\YaboLauncherLibrary.dll
+    Pack:  Toolbox.exe pack bin\Release\net462 <out dir>  ->  .pext (CI does this on a release)
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net462</TargetFramework>
+    <AssemblyName>YaboLauncherLibrary</AssemblyName>
+    <RootNamespace>YaboLauncherLibrary</RootNamespace>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Reference-only: Playnite supplies both at runtime, so neither is copied out. -->
+    <PackageReference Include="PlayniteSDK" Version="6.16.0">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- WPF by plain reference, not UseWPF: the settings view is built in code, so there
+         is no XAML to compile and the project builds on any OS (the tests run on Linux). -->
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The export model is shared source, parsed the same way in the tests. -->
+    <Compile Include="../Shared/LauncherExport.cs" Link="Shared/LauncherExport.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="extension.yaml" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="icon.png" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

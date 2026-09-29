@@ -1,0 +1,18 @@
+# y4bo Launcher library for Playnite. Replaces YaboLibrary: the same manifest Id,
+# so installing this .pext upgrades that extension in place, and the same class
+# Guid (YaboLauncherLibraryPlugin.Id), so the games it imported stay ours.
+# Neither may change once shipped.
+Id: YaboLibrary_d3c1f0a2
+Name: y4bo Launcher
+Author: y4bo
+Version: 0.1.0 # x-release-please-version
+Module: YaboLauncherLibrary.dll
+Type: GameLibrary
+Icon: icon.png
+Links:
+  - Name: Source
+    Url: https://github.com/yabo-san/playnite-extensions
+Description: >
+  Imports the y4bo launcher's library from its playnite-export.json and keeps it
+  in sync as the launcher changes it. Installs, uninstalls and "open in launcher"
+  go through the launcher itself.
