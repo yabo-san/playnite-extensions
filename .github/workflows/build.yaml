@@ -3,14 +3,39 @@ name: build
 # Every extension here is an independent project that compiles to a single DLL
 # against Playnite's plugin ABI. Nothing is deployed from CI: the artifacts are
 # what a release picks up, and a red build is the only signal that matters.
+# Builds the extensions that are actually in use. RohanKar has its own workflows
+# (rohankar.yml, rohankar-release.yml). GithubLauncher, YaboDev and GlazeWM stay in
+# the repo but are not built: they were dropped from the live Playnite on 2026-09-25.
 on:
   push:
     branches: [main]
+    paths:
+      - 'Hydra/**'
+      - 'YaboLibrary/**'
+      - 'Shared/**'
+      - 'Shared.Tests/**'
+      - '.github/workflows/build.yaml'
   pull_request:
+    paths:
+      - 'Hydra/**'
+      - 'YaboLibrary/**'
+      - 'Shared/**'
+      - 'Shared.Tests/**'
+      - '.github/workflows/build.yaml'
   workflow_dispatch:
 
 jobs:
+  shared-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Shared tests
+        run: dotnet test Shared.Tests --nologo
   build:
+    needs: shared-tests
     # net462 targets the .NET Framework reference assemblies, which only the
     # Windows images carry. ubuntu-latest cannot build these at all.
     runs-on: windows-latest
@@ -21,11 +46,7 @@ jobs:
       matrix:
         plugin:
           - Hydra
-          - RohanKar
-          - GithubLauncher
           - YaboLibrary
-          - YaboDev
-          - GlazeWM
 
     steps:
       - uses: actions/checkout@v4
