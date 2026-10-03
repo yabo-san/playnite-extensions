@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Drop for Playnite: a GameLibrary plugin for a Drop instance, the same rule as
+    Hydra and RohanKar. Drop's server and desktop client solve storage, chunking,
+    encryption and auth; this plugin puts a Playnite card in front of that and
+    speaks the client protocol read off `Drop-OSS/drop` and `Drop-OSS/drop-app`.
+
+    Two halves, one plugin:
+      library   sign in by device code, one card per game in your Drop library,
+                Install = manifest + chunks (AES-128 Ctr64LE, sha256 per chunk), Play.
+      send      right-click any Playnite game -> "Send to Drop": copies its install
+                folder into the Drop library share and calls the admin import API.
+                Needs an admin API token in settings; absent, the menu item is absent.
+
+    Build: dotnet build -c Release  ->  bin\Release\net462\DropPlaynite.dll
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net462</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>DropPlaynite</AssemblyName>
+    <RootNamespace>DropPlaynite</RootNamespace>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Reference-only: Playnite supplies both at runtime. -->
+    <PackageReference Include="PlayniteSDK" Version="6.16.0">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <!-- Ships with the plugin. Drop authenticates every client request with an
+         ES384 JWT signed by the EC private key the server hands out at handshake
+         (drop-app remote/src/auth.rs). net462 cannot import an EC PEM on its own;
+         BouncyCastle can, and "SHA-384withPLAIN-ECDSA" gives the r||s form JWT wants. -->
+    <PackageReference Include="BouncyCastle.Cryptography" Version="2.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Shared source, compiled in (see Shared.Tests.csproj for why not a DLL). -->
+    <Compile Include="../Shared/*.cs" />
+    <None Update="extension.yaml" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="icon.png" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

@@ -1,7 +1,7 @@
 name: Release
 
-# One release-please run for every shipped component (RohanKar plugin, the two
-# Mythos themes). Merging a component's release PR tags it; the matching job
+# One release-please run for every shipped component (RohanKar and Drop plugins,
+# the MythosFast theme). Merging a component's release PR tags it; the matching job
 # below builds its package and attaches it to that release.
 on:
   push:
@@ -18,8 +18,8 @@ jobs:
     outputs:
       rohankar_created: ${{ steps.release.outputs['RohanKar--release_created'] }}
       rohankar_tag: ${{ steps.release.outputs['RohanKar--tag_name'] }}
-      yabotheme_created: ${{ steps.release.outputs['YaboTheme--release_created'] }}
-      yabotheme_tag: ${{ steps.release.outputs['YaboTheme--tag_name'] }}
+      drop_created: ${{ steps.release.outputs['Drop--release_created'] }}
+      drop_tag: ${{ steps.release.outputs['Drop--tag_name'] }}
       mythosfast_created: ${{ steps.release.outputs['MythosFast--release_created'] }}
       mythosfast_tag: ${{ steps.release.outputs['MythosFast--tag_name'] }}
     steps:
@@ -53,20 +53,29 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: gh release upload "${{ needs.release-please.outputs.rohankar_tag }}" RohanKar/bin/*.pext --clobber
 
-  mythos-cider-pthm:
+  drop-pext:
     needs: release-please
-    if: needs.release-please.outputs.yabotheme_created == 'true'
-    runs-on: ubuntu-latest
+    if: needs.release-please.outputs.drop_created == 'true'
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ needs.release-please.outputs.yabotheme_tag }}
-      - name: Pack .pthm
-        run: bash scripts/pack-theme.sh YaboTheme
-      - name: Attach .pthm to the release
+          ref: ${{ needs.release-please.outputs.drop_tag }}
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Shared tests
+        run: dotnet test Shared.Tests --nologo
+      - name: Build
+        run: dotnet build Drop -c Release --nologo
+      - name: Pack .pext
+        shell: bash
+        run: bash Drop/pack.sh
+      - name: Attach .pext to the release
+        shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release upload "${{ needs.release-please.outputs.yabotheme_tag }}" YaboTheme/bin/*.pthm --clobber
+        run: gh release upload "${{ needs.release-please.outputs.drop_tag }}" Drop/bin/*.pext --clobber
 
   mythos-fast-pthm:
     needs: release-please

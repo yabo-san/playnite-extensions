@@ -10,17 +10,10 @@
       "bump-minor-pre-major": true,
       "changelog-path": "CHANGELOG.md",
       "extra-files": [
-        { "type": "generic", "path": "extension.yaml" }
-      ]
-    },
-    "YaboTheme": {
-      "release-type": "simple",
-      "package-name": "mythos-cider",
-      "component": "mythos-cider",
-      "include-component-in-tag": true,
-      "changelog-path": "CHANGELOG.md",
-      "extra-files": [
-        { "type": "generic", "path": "theme.yaml" }
+        {
+          "type": "generic",
+          "path": "extension.yaml"
+        }
       ]
     },
     "MythosFast": {
@@ -30,7 +23,24 @@
       "include-component-in-tag": true,
       "changelog-path": "CHANGELOG.md",
       "extra-files": [
-        { "type": "generic", "path": "theme.yaml" }
+        {
+          "type": "generic",
+          "path": "theme.yaml"
+        }
+      ]
+    },
+    "Drop": {
+      "release-type": "simple",
+      "package-name": "drop-playnite",
+      "component": "drop-playnite",
+      "include-component-in-tag": true,
+      "bump-minor-pre-major": true,
+      "changelog-path": "CHANGELOG.md",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "extension.yaml"
+        }
       ]
     }
   }
