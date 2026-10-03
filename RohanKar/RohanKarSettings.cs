@@ -30,9 +30,27 @@ namespace RohanKarPlaynite
         public static string DefaultExportPath => Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "rohankar-launcher", "playnite-export.json");
 
-        /// <summary>Where the installer puts the launcher for one user.</summary>
-        public static string DefaultLauncherExePath => Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Programs", "rohankar-launcher", "RohanKar Launcher.exe");
+        /// <summary>
+        /// Where the installer puts the launcher for one user. The fork's exe is y4bo.exe
+        /// (productName "y4bo"); the chezmoi install on the owner's PC keeps the upstream folder
+        /// name, and an upstream install is still "RohanKar Launcher.exe". First one that exists wins;
+        /// if none does, the first candidate is reported so the error names a real path.
+        /// </summary>
+        public static string DefaultLauncherExePath
+        {
+            get
+            {
+                var programs = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Programs");
+                var candidates = new[]
+                {
+                    Path.Combine(programs, "rohankar-launcher", "y4bo.exe"),
+                    Path.Combine(programs, "y4bo", "y4bo.exe"),
+                    Path.Combine(programs, "rohankar-launcher", "RohanKar Launcher.exe"),
+                };
+                foreach (var c in candidates) if (File.Exists(c)) return c;
+                return candidates[0];
+            }
+        }
 
         public string EffectiveExportPath => string.IsNullOrWhiteSpace(ExportPath) ? DefaultExportPath : ExportPath.Trim();
         public string EffectiveLauncherExePath => string.IsNullOrWhiteSpace(LauncherExePath) ? DefaultLauncherExePath : LauncherExePath.Trim();
