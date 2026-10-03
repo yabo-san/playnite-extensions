@@ -1,7 +1,7 @@
 Id: Drop_5b8e1c2a-7d43-4f06-9a1e-3c2b6d8f0e47
 Name: Drop
 Author: kevin
-Version: 0.1.0 # x-release-please-version
+Version: 0.2.0 # x-release-please-version
 Module: DropPlaynite.dll
 Type: GameLibrary
 Description: >
