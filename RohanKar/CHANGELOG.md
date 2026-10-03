@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/yabo-san/playnite-extensions/compare/rohankar-playnite-v1.1.0...rohankar-playnite-v1.1.1) (2026-10-03)
+
+
+### Bug Fixes
+
+* **rohankar:** find the fork's y4bo.exe by default; the installer keeps the upstream folder name ([fdff91b](https://github.com/yabo-san/playnite-extensions/commit/fdff91b366f362480f1e0286e0fb95d85890bf2b))
+
 ## [1.1.0](https://github.com/yabo-san/playnite-extensions/compare/rohankar-playnite-v1.0.0...rohankar-playnite-v1.1.0) (2026-09-29)
 
 
