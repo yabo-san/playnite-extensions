@@ -1,0 +1,19 @@
+Id: Drop_5b8e1c2a-7d43-4f06-9a1e-3c2b6d8f0e47
+Name: Drop
+Author: kevin
+Version: 0.1.0 # x-release-please-version
+Module: DropPlaynite.dll
+Type: GameLibrary
+Description: >
+  Your Drop library as Playnite cards. Sign in once with a device code (the same
+  flow as the Drop desktop app: a short code you approve in Drop's web UI), then
+  every game in your Drop library appears here. Install downloads the game through
+  Drop's own manifest and chunk protocol, Play runs the version's launch command.
+
+  With an admin API token set, any Playnite game gets a right-click "Send to Drop"
+  that copies its install folder into the Drop library and imports it. Games you
+  sent yourself are hidden from your own Drop cards so you never see the same game
+  twice.
+
+  Requires a Drop instance you can reach. Nothing else.
+Icon: icon.png

@@ -70,3 +70,7 @@ and the application is what is being retired.
 
 The old repo is not deleted — this is a hedge against it being cleaned up later,
 not a replacement for it.
+
+## Also parked here (2026-10-02)
+
+`YaboDev/` and `YaboLibrary/`: two plugins from the launcher era, disabled in Playnite and not built. YaboLibrary stays until the 13 library records that carry its plugin id move to RohanKar.

@@ -1,12 +1,11 @@
 name: Themes
 
-# PR check for the two Mythos themes: the manifest parses, the XAML is well
+# PR check for the MythosFast theme: the manifest parses, the XAML is well
 # formed, and the .pthm packs. The package is uploaded as an artifact so it can
 # be dropped into Playnite for a look before merging.
 on:
   pull_request:
     paths:
-      - 'YaboTheme/**'
       - 'MythosFast/**'
       - 'scripts/pack-theme.sh'
       - '.github/workflows/themes.yml'
@@ -20,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        theme: [YaboTheme, MythosFast]
+        theme: [MythosFast]
     steps:
       - uses: actions/checkout@v4
       - name: theme.yaml parses and carries Id, Name, Version

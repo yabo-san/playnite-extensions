@@ -32,6 +32,8 @@ namespace RohanKarPlaynite
         public override string Name => "RohanKar";
 
         public override LibraryClient Client { get; }
+        public override string LibraryIcon => System.IO.Path.Combine(
+            System.IO.Path.GetDirectoryName(typeof(RohanKarLibraryPlugin).Assembly.Location), "icon.png");
 
         private const string GameIdsFile = "game-ids.json";
 

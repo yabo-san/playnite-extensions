@@ -4,6 +4,7 @@ Author: kevin
 Version: 1.1.0 # x-release-please-version
 Module: RohanKarPlaynite.dll
 Type: GameLibrary
+Icon: icon.png
 Description: >
   Imports the y4bo launcher's library into Playnite and keeps it in step.
 

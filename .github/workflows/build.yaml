@@ -3,22 +3,21 @@ name: build
 # Every extension here is an independent project that compiles to a single DLL
 # against Playnite's plugin ABI. Nothing is deployed from CI: the artifacts are
 # what a release picks up, and a red build is the only signal that matters.
-# Builds the extensions that are actually in use. RohanKar has its own workflows
-# (rohankar.yml, rohankar-release.yml). GithubLauncher, YaboDev and GlazeWM stay in
-# the repo but are not built: they were dropped from the live Playnite on 2026-09-25.
+# Builds the extensions that ship: Hydra and Drop here, RohanKar in rohankar.yml.
+# Parked source lives in _salvage/ and is not built.
 on:
   push:
     branches: [main]
     paths:
       - 'Hydra/**'
-      - 'YaboLibrary/**'
+      - 'Drop/**'
       - 'Shared/**'
       - 'Shared.Tests/**'
       - '.github/workflows/build.yaml'
   pull_request:
     paths:
       - 'Hydra/**'
-      - 'YaboLibrary/**'
+      - 'Drop/**'
       - 'Shared/**'
       - 'Shared.Tests/**'
       - '.github/workflows/build.yaml'
@@ -41,12 +40,12 @@ jobs:
     runs-on: windows-latest
 
     strategy:
-      # One red plugin should not hide the state of the other five.
+      # One red plugin should not hide the state of the other.
       fail-fast: false
       matrix:
         plugin:
           - Hydra
-          - YaboLibrary
+          - Drop
 
     steps:
       - uses: actions/checkout@v4
@@ -84,7 +83,7 @@ jobs:
         with:
           name: ${{ matrix.plugin }}
           # Everything except the debug symbols. Playnite will not load a DLL
-          # without its extension.yaml, and YaboLibrary also ships an icon.png,
+          # without its extension.yaml, and Drop also ships an icon.png,
           # so listing files individually silently drops assets a plugin adds
           # later. Take the folder and exclude what we do not want instead.
           path: |
